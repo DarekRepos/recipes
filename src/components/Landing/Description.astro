@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content'
+import CardDescription from '../CardDescription.astro'
+
+const items = await getCollection('introduction')
+---
+
+<section id='introduction' class='grid py-16 gap-8 overflow-hidden'>
+  {items.map((item, index) => (
+    <CardDescription item={item} index={index}/>
+  ))}
+</section>

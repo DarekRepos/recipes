@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
+
+type Props = {
+  item: CollectionEntry<'introduction'>
+  index: number
+}
+
+const { item, index } = Astro.props
+
+function isOdd(num: number): boolean {
+  return num % 2 !== 0
+}
+---
+
+<div class='flex flex-col items-center justify-center gap-8 sm:flex-row'>
+  <div class={`w-full sm:w-[50%] ${isOdd(index) ? 'sm:order-2 order-1' : 'order-1'}`}>
+    <Image src={item.data.imageUrl} alt={item.data.title} class='rounded' />
+  </div>
+  <div
+    class={`bg-ss-white px-6 py-auto text-center sm:w-[50%] sm:px-0 sm:text-left ${isOdd(index) ? 'sm:order-1 order-2' : 'order-2'}`}
+  >
+    <div class='mx-auto px-6 sm:max-w-[500px]'>
+      <h1
+        class='font-fraunces text-ss-very-dark-desaturated-blue text-3xl font-bold sm:text-[2.5rem] sm:leading-tight text-yellow-800'
+      >
+        {item.data.title}
+      </h1>
+      <p class='text-body text-ss-dark-grayish-blue mb-8 mt-6'>
+        {item.data.description}
+      </p>
+      <div class="flex cursor-pointer flex-col items-center sm:items-start">
+        <a
+          href="/recipes/borderland"
+          class="whitespace-nowrap rounded-3xl border-2 border-yellow-800 py-2 px-4 text-xl uppercase text-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        >
+          Read more
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+---
+import type {CollectionEntry} from "astro:content"
+import Tag from "./Tag.astro"
+type Props = {
+    tags: CollectionEntry<"recipes">["data"]["tags"]
+    title?: string
+}
+
+const {tags, title} = Astro.props
+---
+
+<div
+    class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1"
+>
+    {title && <h2 class="font-bold text-5xl text-yellow-800">{title}</h2>}
+
+    <div class="flex gap-4 flex-wrap justify-center items-center">
+        {tags.map(tag => <Tag tag={tag} />)}
+    </div>
+</div>

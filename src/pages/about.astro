@@ -1,0 +1,49 @@
+---
+import Container from '../components/Container.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title='About' active='about'>
+  <Container>
+    <article>
+      <div class='grid min-h-screen place-items-center'>
+        <!-- Responsive Grid Layout -->
+        <div class='xs:grid-cols-2 xs:p-8 grid max-w-7xl gap-4 p-4 md:grid-cols-4 lg:gap-6'>
+          <h1
+            class='xs:col-span-2 xs:grid xs:gap-4 xs:grid-cols-2 text-4xl font-extrabold md:col-span-3 md:grid-cols-3 md:text-5xl lg:text-6xl'
+          >
+            <span class='text-yellow-800 md:col-span-2'>A Culinary Journey</span>
+          </h1>
+          <p
+            class='xs:row-start-2 xs:col-start-2 xs:self-center md:col-span-2 md:col-start-1 md:pr-12 md:text-lg'
+          >
+            Cooking is not just a means to an end; it's a pathway to happiness a form of meditation
+            that brings fulfillment and joy. In a world that's increasingly fast-paced and
+            stressful, the simple act of preparing a meal has become a sanctuary for many, myself
+            included. It's where I find peace, relaxation, and a chance to recharge.
+          </p>
+          <div class='xs:h-auto h-16 self-end bg-yellow-900'></div>
+          <div class='xs:h-auto h-16 self-end bg-yellow-900'></div>
+          <div class='xs:h-auto h-16 bg-yellow-600 flex items-center justify-center'>
+            <div class='text-center text-white'>Journey</div>
+          </div>
+          <div class='xs:h-auto h-16 bg-yellow-900 md:col-start-2'></div>
+          <div class='xs:h-auto h-16 bg-yellow-600 flex items-center justify-center'>
+            <div class='text-center text-white'>Tradition</div>
+          </div>
+          <div class='xs:h-auto h-16 bg-yellow-900'></div>
+          <div class='xs:h-auto h-16 bg-yellow-900'></div>
+          <div class='xs:h-auto h-16 bg-yellow-600 flex items-center justify-center'>
+            <div class='text-center text-white'>Recipes</div>
+          </div>
+          <p class='self-center md:col-span-2 md:px-4 md:text-center md:text-lg'>
+            The kitchen is more than just a place to cook; it's a haven where time seems to stand
+            still. Amidst the whirlwind of modern life, this is my retreat a space where I can
+            create, experiment, and nourish both body and soul. Join me on this culinary journey,
+            where every recipe tells a story and every dish is crafted with love.
+          </p>
+        </div>
+      </div>
+    </article>
+  </Container>
+</Layout>

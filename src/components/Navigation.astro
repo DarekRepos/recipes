@@ -1,0 +1,78 @@
+---
+const { active } = Astro.props
+---
+
+<nav>
+  <div class='flex justify-end'>
+    <div class='burger lg:hidden'>
+      <div class='bar1 my-1.5 h-1 w-7 bg-gray-800 duration-300'></div>
+      <div class='bar2 my-1.5 h-1 w-7 bg-gray-800'></div>
+      <div class='bar3 my-1.5 h-1 w-7 bg-gray-800 duration-300'></div>
+    </div>
+  </div>
+  <div class='flex flex-col p-5 lg:flex-row'>
+    <ul
+      class='links hidden w-full flex-col text-center lg:flex lg:flex-row lg:justify-around lg:space-x-4 max-lg:space-y-4'
+    >
+      <li>
+        <a
+          href='/recipes'
+          class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'home' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          href='/recipes/borderland'
+          class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'bordeland' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
+        >
+          Borderland
+        </a>
+      </li>
+      <li>
+        <a
+          href='/recipes/recipe/list/1'
+          class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'recipes' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
+        >
+          Recipes
+        </a>
+      </li>
+      <li>
+        <a
+          href='/recipes/about'
+          class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'about' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
+        >
+          About
+        </a>
+      </li>
+      <li>
+        <a
+          href='/recipes/contact'
+          class={`block rounded-xl px-6 py-3 text-xl text-white  opacity-70 hover:opacity-100 duration-300 ${active === 'contact' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script type='module'>
+  const burger = document.querySelector('.burger')
+  const links = document.querySelector('.links')
+  const bar1 = document.querySelector('.bar1')
+  const bar2 = document.querySelector('.bar2')
+  const bar3 = document.querySelector('.bar3')
+
+  burger.addEventListener('click', () => {
+    links.classList.toggle('hidden')
+    bar1.classList.toggle('transform')
+    bar1.classList.toggle('translate-y-1.5')
+    bar1.classList.toggle('-rotate-45')
+    bar2.classList.toggle('hidden')
+    bar3.classList.toggle('transform')
+    bar3.classList.toggle('-translate-y-1')
+    bar3.classList.toggle('rotate-45')
+  })
+</script>

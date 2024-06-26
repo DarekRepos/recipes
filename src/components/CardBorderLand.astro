@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
+
+type Props = {
+  item: CollectionEntry<'borderland'>
+}
+
+const { item} = Astro.props
+
+---
+<div class="card mb-3 max-w-540px">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+      <div class="col-span-1 md:col-span-1">
+        <Image src={item.data.imageUrl} alt={item.data.title} class='rounded-xl' />
+    </div>
+      <div class="col-span-1 md:col-span-1 px-6">
+        <div class="card-body">
+          <h5 class="font-fraunces text-ss-very-dark-desaturated-blue text-3xl font-bold sm:text-[2.5rem] sm:leading-tight max-sm:mt-8 text-yellow-800">{item.data.title}</h5>
+          <p class="text-body text-ss-dark-grayish-blue mb-8 mt-6">{item.data.description}</p>
+        </div>
+      </div>
+    </div>
+  </div>

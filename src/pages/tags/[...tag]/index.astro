@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content'
+
+import PostList from '../../../components/PostList.astro'
+import Layout from '../../../layouts/Layout.astro'
+import Container from '../../../components/Container.astro'
+import RecipeHeader from '../../../components/RecipeHeader.astro'
+import Tag from '../../../components/Tag.astro'
+
+export async function getStaticPaths() {
+  const getTags = async () => {
+    const posts = await getCollection('recipes')
+    const tags = new Set()
+    posts.forEach((post) => {
+      post.data.tags.forEach((tag) => {
+        tags.add(tag.toLowerCase())
+      })
+    })
+    console.log(tags)
+    return Array.from(tags)
+  }
+  const tags = await getTags()
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag }
+  }))
+}
+
+const { tag } = Astro.props
+
+const getPostByTag = async (tag) => {
+  const posts = await getCollection('recipes')
+  const lowercaseTag = tag.toLowerCase()
+  return posts.filter((post) => {
+    return post.data.tags.some((postTag) => postTag.toLowerCase() === lowercaseTag)
+  })
+}
+
+const posts = await getPostByTag(tag)
+---
+
+<Layout title=`${tag} - The forgotten recipes` ` description='Tags and recipes' active='recipes'>
+  <Container>
+    <div>
+      <a href='/recipes/recipe/list/1' class='mb-16 block text-2xl text-zinc-500 underline'
+        >← Back to first page</a
+      >
+      <RecipeHeader />
+
+      {tag && <h2 class='text-5xl font-bold text-yellow-800 mb-16'>Recipes tagged:   <span class='whitespace-nowrap rounded-3xl border-2 border-yellow-800 p-2 text-xl uppercase text-yellow-800'>{tag}</span></h2>}
+ 
+      {
+        posts.length === 0 ? (
+          <p>No recipes were found with that tag</p>
+        ) : (
+          <>
+            <PostList posts={posts} />
+          </>
+        )
+      }
+    </div>
+  </Container>
+</Layout>

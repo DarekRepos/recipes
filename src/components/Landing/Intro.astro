@@ -1,0 +1,55 @@
+---
+import ScrollButton from "../buttons/ScrollButton.astro";
+
+
+---
+
+<section
+  class="flex h-screen items-center justify-center bg-[url('/recipes/images/old_house.jpg')] bg-cover bg-center bg-no-repeat opacity-70"
+>
+  <div class='flex flex-col items-center justify-center text-center'>
+    <figure
+      class='text-shadow-2xl flex flex-col items-center font-special-elite text-custom-yellow'
+    >
+      <blockquote class='relative mx-auto max-w-xs p-2 text-2xl font-bold'>
+        <p>
+          This magical, marvelous food on our plate, this sustenance we absorb, has a story to tell.
+          It has a journey.
+        </p>
+        <span class='absolute left-[-0.5rem] top-[-2rem] text-6xl'>&ldquo;</span>
+        <span class='absolute bottom-[0.125rem] right-[-0.5rem] text-6xl'>&rdquo;</span>
+      </blockquote>
+      <figcaption class='text-white'>
+        American farmer, lecturer, and author<br /><cite title='Source Title'>Joel Salatin</cite>
+      </figcaption>
+    </figure>
+    <ScrollButton/>
+  </div>
+</section>
+<style lang='scss'>
+  @import url('https://fonts.googleapis.com/css?family=Special+Elite');
+
+  @keyframes sdtapping {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    60% {
+      box-shadow: 0 0 0 60px rgba(255, 255, 255, 0.1);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .text-shadow-2xl {
+    text-shadow: 2px 2px black;
+  }
+
+  .animate-sdtapping {
+    animation: sdtapping 3s infinite;
+  }
+</style>
