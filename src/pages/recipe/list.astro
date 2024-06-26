@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+import PostList from '../../components/PostList.astro'
+import TagList from '../../components/TagList.astro'
+import Container from '../../components/Container.astro'
+import RecipeHeader from '../../components/RecipeHeader.astro'
+
+
+const allPosts = await getCollection('recipes')
+const allTags = allPosts.flatMap((post) => post.data.tags)
+const tags = Array.from(new Set(allTags))
+
+---
+
+<Layout title='Recipes' active='recipes'>
+  <Container>
+    <RecipeHeader />
+
+    <div class='mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1'>
+      <TagList tags={tags} title='Tags' />
+    </div>
+
+    <div class='mb-32'>
+      <PostList posts={allPosts} />
+    </div>
+  </Container>
+</Layout>

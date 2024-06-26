@@ -1,0 +1,34 @@
+<div class="py-16">
+    <div id="scrollButton" class="relative">
+      <a href="#section-articles" class="block text-white transform transition duration-300 hover:opacity-50 hover:scale-110">
+        <button class="relative w-16 h-16 border border-white rounded-full bg-transparent text-white font-normal text-[20px] leading-[64px] font-josefin-sans cursor-pointer box-border">
+          Scroll
+          <span class="absolute top-2/3 left-1/2 w-4 h-4 border-l border-b border-white transform rotate-[-45deg] translate-x-[-50%] translate-y-[-50%]"></span>
+          <span class="absolute top-0 left-0 w-16 h-16 rounded-full box-border opacity-0 animate-sdtapping"></span>
+        </button>
+      </a>
+    </div>
+  </div>
+  
+  <style>
+    @keyframes sdtapping {
+      0% {
+        opacity: 0;
+      }
+      30% {
+        opacity: 1;
+      }
+      60% {
+        box-shadow: 0 0 0 60px rgba(255, 255, 255, 0.1);
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  
+    .animate-sdtapping {
+      animation: sdtapping 3s infinite;
+    }
+  </style>
+  

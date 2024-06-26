@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets'
+import prazucha from '../../assets/prazucha.jpg'
+import maki from '../../assets/maki.png'
+import warzywa from '../../assets/warzywa.png'
+import pierogi from '../../assets/pierogi.jpg'
+
+const gallery = [prazucha, pierogi, maki, warzywa]
+---
+
+<section class='w-full overflow-hidden'>
+  <div class='grid grid-cols-2 lg:grid-cols-4'>
+    {gallery.map((image) => (
+      <picture class='h-full w-full aspect-w-16 aspect-h-9'>
+        <Image
+          src={image}
+          widths={[240, 540, 720]}
+          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 100vw`} 
+          alt='The most characteristic elemts of Kresy: dishes, ingriediends, landscape'
+          class='object-contain sm:object-cover'
+          format='webp'
+        />
+      </picture>
+    ))}
+  </div>
+</section>

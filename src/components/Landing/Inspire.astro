@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets'
+import culinaryJourneyImage from '../../assets/journey.png';
+---
+<section class="py-16 text-center xl:py-[10.67rem] xl:pb-[12.27rem]">
+    <div class="container mx-auto">
+      <div class="xl:flex xl:text-left">
+        <div class="mx-auto flex-1 xl:h-[33.33rem]">
+            <Image 
+              src={culinaryJourneyImage} 
+              alt="A few dishes prepared from chef on the table" 
+              sizes="(max-width: 767px) 711px, 731px" 
+              class="mx-auto rounded-xl w-full h-full object-cover"
+            />
+          </div>
+        <div
+          class="px-4 pt-8 xl:relative xl:-ml-[10.73rem] xl:flex-1 xl:self-end xl:bg-white xl:pl-16 xl:pt-16"
+        >
+          <h2 class="text-[2.13rem] xl:text-[3.2rem]">A Culinary Journey</h2>
+          <p class="pt-[1.07rem] leading-[1.67] opacity-50 lg:pt-[1.67rem]">
+            I hope that this website will not only inspire you in the kitchen to rediscover the tastes
+            of older generations but will allow you, if only for a moment, to experience the unique
+            smell of the forgotten Kresy region.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  

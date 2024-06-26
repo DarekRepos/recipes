@@ -1,0 +1,14 @@
+---
+type Props = {
+  tag: string
+}
+
+const { tag } = Astro.props
+---
+
+<a
+  href={`/recipes/tags/${tag}`}
+  class='whitespace-nowrap rounded-3xl border-2 border-yellow-800 py-2 px-4 text-xl uppercase text-yellow-800'
+>
+  {tag}
+</a>

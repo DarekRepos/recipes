@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://DarekRepos.github.io/recipes/sitemap-index.xml

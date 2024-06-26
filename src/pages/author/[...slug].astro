@@ -1,0 +1,43 @@
+---
+import { getCollection, getEntry } from 'astro:content'
+
+import Layout from '../../layouts/Layout.astro'
+import PostList from '../../components/PostList.astro'
+import Container from '../../components/Container.astro'
+
+export async function getStaticPaths() {
+  const authors = await getCollection('authors')
+
+  return authors.map(({ slug }) => {
+    return {
+      params: { slug  }
+    }
+  })
+}
+
+const { slug } = Astro.params
+
+const author = await getEntry('authors', slug as string)
+if (!author) {
+  return Astro.redirect('/404')
+}
+
+const allPosts = await getCollection('recipes')
+const posts = allPosts.filter((post) => post.data.author === author.slug)
+---
+
+<Layout title={author.data.name} active='recipes'>
+  <Container>
+    <div class='mb-16 text-2xl text-zinc-500'>
+      ← <a href='/recipes/recipe/list/1' class='underline'>Back to  first page</a>
+    </div>
+
+    <p class='mb-16 text-6xl font-bold text-yellow-800'>
+      Recipes by {author.data.name}
+    </p>
+
+    <div class='mb-60'>
+      <PostList posts={posts} />
+    </div>
+  </Container>
+</Layout>
