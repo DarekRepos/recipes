@@ -5,7 +5,11 @@ import PostList from '../../../components/PostList.astro'
 import Layout from '../../../layouts/Layout.astro'
 import Container from '../../../components/Container.astro'
 import RecipeHeader from '../../../components/RecipeHeader.astro'
-import Tag from '../../../components/Tag.astro'
+
+interface AstroProps {
+  tag: string;
+}
+
 
 export async function getStaticPaths() {
   const getTags = async () => {
@@ -27,9 +31,9 @@ export async function getStaticPaths() {
   }))
 }
 
-const { tag } = Astro.props
+const { tag } = Astro.props as AstroProps
 
-const getPostByTag = async (tag) => {
+const getPostByTag = async (tag:string) => {
   const posts = await getCollection('recipes')
   const lowercaseTag = tag.toLowerCase()
   return posts.filter((post) => {
