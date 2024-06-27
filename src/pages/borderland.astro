@@ -13,8 +13,8 @@ const items = await getCollection('borderland')
 
 <Layout title='Eastern borderlands' active='bordeland'>
   <Container> 
-    {items.map((item, index) => (
-      <CardBorderLand item={item} index={index}/>
+    {items.map((item) => (
+      <CardBorderLand item={item}/>
     ))}
   </Container>
 </Layout>
