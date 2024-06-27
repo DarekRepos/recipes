@@ -1,54 +1,38 @@
-# Astro Starter Kit: Basics
 
-```sh
-npm create astro@latest -- --template basics
-```
+# A Culinary Journey
+[![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Welcome to A Culinary Journey, a website dedicated to promoting the forgotten regional meals from the Polish Kresy region. Here, we aim to inspire you in the kitchen and help you rediscover the tastes of older generations. Our hope is that you can experience, if only for a moment, the unique smell and flavor of the Kresy region.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Why This Website?
 
-## 🚀 Project Structure
+The goal of this website is to bring attention to and promote the traditional, forgotten recipes from the Polish Kresy region. These recipes represent a rich culinary heritage that deserves to be rediscovered and cherished.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Features
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+    - Recipes: Explore a collection of traditional recipes from the Kresy region.
+    - Old Recipes Website: A nostalgic look at regional meals and their historical significance.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Technologies Used
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+    - Astro: The website is built using Astro, a modern static site generator.
+    - Vue Components: Interactive components are created using Vue.js.
+    - Tailwind CSS: For styling, we use Tailwind CSS to ensure a beautiful and responsive design.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Screenshots
+Desktop View
 
-## 🧞 Commands
+<img alt="desktop view screenshot" src="./docs/screenshots/screenshot-desktop.png" width="600" height="320">
 
-All commands are run from the root of the project, from a terminal:
+Mobile View
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+<img alt="mobile view screenshot" src="./docs/screenshots/screenshot-mobile.png" width="150" height="350">
 
-## 👀 Want to learn more?
+# Final Result
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+To see the final result of this project, click [here](https://darekrepos.github.io/recipes/).
+
+I love to receive feedback on improving my site. If you encounter any problems or have suggestions, please report them. Your input is greatly appreciated!
+
+Thank you for visiting A Culinary Journey. Enjoy exploring the tastes and smells of the forgotten Kresy region!
