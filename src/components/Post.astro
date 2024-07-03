@@ -10,7 +10,6 @@ type Props = {
 
 const {post} = Astro.props
 const author = await getEntry("authors", post.data.author)
-//todo: parse  only first description paragraf without heding
 ---
 
 <article>
