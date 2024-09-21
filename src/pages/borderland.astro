@@ -6,15 +6,10 @@ import Layout from '../layouts/Layout.astro'
 const items = await getCollection('borderland')
 ---
 
-<section id='introduction' class='grid py-16 gap-8 overflow-hidden'>
-
-</section>
-
-
 <Layout title='Eastern borderlands' active='bordeland'>
-  <Container> 
-    {items.map((item) => (
-      <CardBorderLand item={item}/>
-    ))}
+  <Container>
+    <section id='introduction' class='grid gap-8 overflow-hidden py-16'>
+      {items.map((item) => <CardBorderLand item={item} />)}
+    </section>
   </Container>
 </Layout>
