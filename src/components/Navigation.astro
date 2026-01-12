@@ -18,9 +18,19 @@ const pathname = Astro.url.pathname // e.g. "/recipes/pl/contact" or "/recipes/c
 
 // 1) Remove base prefix ("/recipes") if present
 function stripBase(path: string) {
-  if (!BASE) return path
-  return path.startsWith(BASE + '/') ? path.slice(BASE.length) : path
+  if (!BASE) return path;
+
+  // normalize
+  if (path === BASE) return "/";
+
+  if (path.startsWith(BASE + "/")) {
+    const rest = path.slice(BASE.length);
+    return rest.startsWith("/") ? rest : `/${rest}`;
+  }
+
+  return path;
 }
+
 
 // 2) Remove any existing locale prefix from the remaining path
 function stripLocale(path: string) {
@@ -34,11 +44,20 @@ function stripLocale(path: string) {
 
 // 3) Build final URL: base + (locale prefix if not default) + clean path
 function buildLocaleUrl(target: Locale) {
-  const noBase = stripBase(pathname) // "/pl/contact" or "/contact"
-  const clean = stripLocale(noBase) || '/' // "/contact"
-  const prefix = target === defaultLocale ? '' : `/${target}`
-  return `${BASE}${prefix}${clean}`
+  const noBase = stripBase(pathname);          // "/pl/contact" or "/contact" OR "/recipes/..."
+  let clean = stripLocale(noBase) || "/";
+
+  // ✅ if the path still starts with "/recipes", remove it (prevents /de/recipes/)
+  if (BASE && clean.startsWith(`${BASE}/`)) {
+    clean = clean.slice(BASE.length) || "/";
+  } else if (BASE && clean === BASE) {
+    clean = "/";
+  }
+
+  const prefix = target === defaultLocale ? "" : `/${target}`;
+  return `${BASE}${prefix}${clean}`;
 }
+
 
 const switcherLinks = locales.map((l) => ({
   locale: l,
