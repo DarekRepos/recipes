@@ -1,0 +1,118 @@
+{
+    "contact": {
+        "title": "Contact",
+        "heading": "I'd Love to Hear From You!",
+        "intro1": "Thank you for visiting my website dedicated to the rich and delicious world of traditional Polish cuisine. Whether you're a lifelong fan of pierogi, a newcomer curious about bigos, or someone with a family recipe to share, I want to connect with you!",
+        "intro2": "Do you have questions about my recipes? Looking for cooking tips or recommendations on where to find authentic ingredients? Maybe you have your own Polish food stories and traditions that you'd like to share with me. Whatever it is, I’m excited to hear from you!",
+        "intro3": "Please fill out the form below to get in touch. Your feedback, questions, and stories are invaluable to me, and I can't wait to respond.",
+        "signature": "Smacznego!",
+        "author": "Darek"
+    },
+    "form": {
+        "nameLabel": "Your name",
+        "namePlaceholder": "your name",
+        "nameError": "Please enter your name",
+        "emailLabel": "Email address",
+        "emailPlaceholder": "name@example.com",
+        "emailError": "Please enter a valid email address",
+        "messageLabel": "Your message",
+        "messagePlaceholder": "write your message here",
+        "messageError": "Please enter your message",
+        "submit": "Send",
+        "success": "Your message has been sent successfully!",
+        "alertSuccess": "Email sent successfully!",
+        "alertFail": "Failed to send email."
+    },
+    "about": {
+        "title": "About",
+        "heading": "A Culinary Journey",
+        "intro1": "Cooking is not just a means to an end; it's a pathway to happiness, a form of meditation that brings fulfillment and joy. In a world that's increasingly fast-paced and stressful, the simple act of preparing a meal has become a sanctuary for many, myself included. It's where I find peace, relaxation, and a chance to recharge.",
+        "labelJourney": "Journey",
+        "labelTradition": "Tradition",
+        "labelRecipes": "Recipes",
+        "intro2": "The kitchen is more than just a place to cook; it's a haven where time seems to stand still. Amidst the whirlwind of modern life, this is my retreat — a space where I can create, experiment, and nourish both body and soul. Join me on this culinary journey, where every recipe tells a story and every dish is crafted with love."
+    },
+    "notFound": {
+        "title": "404",
+        "heading": "Page Not Found 👀",
+        "button": "Return Home"
+    },
+    "borderland": {
+        "title": "Eastern Borderlands"
+    },
+    "footer": {
+        "freeIcons": "Cooking icons created by Freepik - Flaticon",
+        "copyright": "© Made with love in {year} by DarekRepos. All rights reserved."
+    },
+    "nav": {
+        "home": "Home",
+        "borderland": "Borderland",
+        "recipes": "Recipes",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "home": {
+        "title": "Home page",
+        "intro": {
+            "quote": "This magical, marvelous food on our plate, this sustenance we absorb, has a story to tell. It has a journey.",
+            "author": "American farmer, lecturer, and author",
+            "authorName": "Joel Salatin"
+        },
+        "inspire": {
+            "title": "A Culinary Journey",
+            "text": "I hope that this website will not only inspire you in the kitchen to rediscover the tastes of older generations but will allow you, if only for a moment, to experience the unique smell of the forgotten Kresy region.",
+            "imageAlt": "A few dishes prepared by a chef on the table"
+        },
+        "gallery": {
+            "imageAlt": "The most characteristic elements of Kresy: dishes, ingredients, and landscape"
+        }
+    },
+    "common": {
+        "readMore": "Read more",
+        "tags": "Tags"
+    },
+    "authorsPage": {
+        "back": "Back to first page",
+        "heading": "Recipes by {name}"
+    },
+    "authors": {
+        "book-recipe": "Recipes from the book",
+        "traditional-recipe": "Traditional Recipe from the Eastern Borderlands"
+    },
+    "recipesHeader": {
+        "title": "The forgotten recipes",
+        "subtitle": "Is there anyone who remembers the taste of Kresy specialities?"
+    },
+    "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page"
+    },
+    "recipesPage": {
+        "backToList": "Back to first page"
+    },
+    "tagsPage": {
+        "titleSuffix": "The forgotten recipes",
+        "description": "Tags and recipes",
+        "back": "Back to first page",
+        "heading": "Recipes tagged:",
+        "empty": "No recipes were found with that tag"
+    },
+    "tags": {
+        "vegetarian": "Vegetarian",
+        "roll": "Roll",
+        "soup": "Soup",
+        "cold": "Cold",
+        "dish": "Dish",
+        "potatoes": "Potatoes",
+        "baking": "Baking",
+        "meat": "Meat",
+        "barley": "Barley",
+        "cakes": "Cakes",
+        "oven": "Oven",
+        "potato": "Potato",
+        "noodle": "Noodles",
+        "cheese": "Cheese",
+        "drink": "Drink"
+    }
+}

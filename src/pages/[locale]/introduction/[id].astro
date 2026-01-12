@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content'
+import IntroductionPage from '../../../components/pages/IntroductionPage.astro'
+
+//const locales = ['pl', 'de'] as const
+
+export async function getStaticPaths() {
+    // ✅ MUST be inside the function
+  const locales = ["pl", "de"];
+  const items = await getCollection('introductioncards')
+  console.log(
+    'INTRODUCTION IDS:',
+    items.map((i) => i.id)
+  )
+  return items
+    .filter((entry) => locales.some((l) => entry.id.startsWith(`${l}/`)))
+    .map((entry) => {
+      const locale = entry.id.split('/')[0]
+      return {
+        params: {
+          locale,
+          id: String(entry.data.id)
+        }
+      }
+    })
+}
+---
+
+<IntroductionPage locale={Astro.params.locale} id={Astro.params.id} />

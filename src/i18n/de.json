@@ -1,0 +1,118 @@
+{
+    "contact": {
+        "title": "Kontakt",
+        "heading": "Ich freue mich, von dir zu hören!",
+        "intro1": "Vielen Dank für deinen Besuch auf meiner Website, die der reichen und köstlichen Welt der traditionellen polnischen Küche gewidmet ist. Egal, ob du ein lebenslanger Pierogi-Fan bist, neugierig auf Bigos geworden bist oder ein Familienrezept teilen möchtest – ich freue mich darauf, mit dir in Kontakt zu treten!",
+        "intro2": "Hast du Fragen zu meinen Rezepten? Suchst du nach Kochtipps oder Empfehlungen, wo man authentische Zutaten findet? Vielleicht hast du auch eigene Geschichten und kulinarische Traditionen aus der polnischen Küche, die du mit mir teilen möchtest. Was auch immer es ist – ich freue mich, von dir zu hören!",
+        "intro3": "Bitte fülle das untenstehende Kontaktformular aus, um mit mir in Kontakt zu treten. Dein Feedback, deine Fragen und deine Geschichten sind für mich sehr wertvoll, und ich freue mich darauf, dir zu antworten.",
+        "signature": "Guten Appetit!",
+        "author": "Darek"
+    },
+    "form": {
+        "nameLabel": "Dein Name",
+        "namePlaceholder": "dein Name",
+        "nameError": "Bitte gib deinen Namen ein",
+        "emailLabel": "E-Mail-Adresse",
+        "emailPlaceholder": "name@example.com",
+        "emailError": "Bitte gib eine gültige E-Mail-Adresse ein",
+        "messageLabel": "Deine Nachricht",
+        "messagePlaceholder": "schreibe deine Nachricht hier",
+        "messageError": "Bitte gib deine Nachricht ein",
+        "submit": "Senden",
+        "success": "Deine Nachricht wurde erfolgreich gesendet!",
+        "alertSuccess": "E-Mail wurde erfolgreich gesendet!",
+        "alertFail": "E-Mail konnte nicht gesendet werden."
+    },
+    "about": {
+        "title": "Über mich",
+        "heading": "Eine kulinarische Reise",
+        "intro1": "Kochen ist nicht nur ein Mittel zum Zweck – es ist ein Weg zum Glück, eine Form der Meditation, die Erfüllung und Freude bringt. In einer immer schnelllebigeren und stressigeren Welt ist das einfache Zubereiten einer Mahlzeit für viele zu einem Rückzugsort geworden, auch für mich. Hier finde ich Ruhe, Entspannung und neue Energie.",
+        "labelJourney": "Reise",
+        "labelTradition": "Tradition",
+        "labelRecipes": "Rezepte",
+        "intro2": "Die Küche ist mehr als nur ein Ort zum Kochen – sie ist ein Zufluchtsort, an dem die Zeit stillzustehen scheint. Inmitten des modernen Lebens ist sie mein Rückzugsraum, ein Ort zum Schaffen, Experimentieren und zum Nähren von Körper und Seele. Begleite mich auf dieser kulinarischen Reise, bei der jedes Rezept eine Geschichte erzählt und jedes Gericht mit Liebe zubereitet wird."
+    },
+    "notFound": {
+        "title": "404",
+        "heading": "Seite nicht gefunden 👀",
+        "button": "Zur Startseite zurückkehren"
+    },
+    "borderland": {
+        "title": "Östliche Grenzgebiete"
+    },
+    "footer": {
+        "freeIcons": "Kochsymbole erstellt von Freepik - Flaticon",
+        "copyright": "© Mit Liebe erstellt im Jahr {year} von DarekRepos. Alle Rechte vorbehalten."
+    },
+    "nav": {
+        "home": "Startseite",
+        "borderland": "Grenzland",
+        "recipes": "Rezepte",
+        "about": "Über mich",
+        "contact": "Kontakt"
+    },
+    "home": {
+        "title": "Startseite",
+        "intro": {
+            "quote": "Dieses magische, wunderbare Essen auf unserem Teller – diese Nahrung, die wir aufnehmen – hat eine Geschichte. Es hat eine Reise.",
+            "author": "Amerikanischer Landwirt, Dozent und Autor",
+            "authorName": "Joel Salatin"
+        },
+        "inspire": {
+            "title": "Eine kulinarische Reise",
+            "text": "Ich hoffe, dass diese Website dich nicht nur in der Küche dazu inspiriert, die Geschmäcker früherer Generationen neu zu entdecken, sondern dir – wenn auch nur für einen Moment – erlaubt, den einzigartigen Duft der vergessenen Kresy-Region zu erleben.",
+            "imageAlt": "Mehrere von einem Koch zubereitete Gerichte auf dem Tisch"
+        },
+        "gallery": {
+            "imageAlt": "Die charakteristischsten Elemente der Kresy: Gerichte, Zutaten und Landschaft"
+        }
+    },
+    "common": {
+        "readMore": "Mehr lesen",
+        "tags": "Tags"
+    },
+    "authorsPage": {
+        "back": "Zur ersten Seite zurück",
+        "heading": "Rezepte von {name}"
+    },
+    "authors": {
+        "book-recipe": "Rezepte aus dem Buch",
+        "traditional-recipe": "Traditionelles Rezept aus den Kresy"
+    },
+    "recipesHeader": {
+        "title": "Die vergessenen Rezepte",
+        "subtitle": "Erinnert sich noch jemand an den Geschmack der Kresy-Spezialitäten?"
+    },
+    "pagination": {
+        "previous": "Zurück",
+        "next": "Weiter",
+        "page": "Seite"
+    },
+    "recipesPage": {
+        "backToList": "Zur ersten Seite zurück"
+    },
+    "tagsPage": {
+        "titleSuffix": "Die vergessenen Rezepte",
+        "description": "Tags und Rezepte",
+        "back": "Zur ersten Seite zurück",
+        "heading": "Rezepte mit dem Tag:",
+        "empty": "Zu diesem Tag wurden keine Rezepte gefunden"
+    },
+    "tags": {
+        "vegetarian": "Vegetarisch",
+        "roll": "Rolle",
+        "soup": "Suppe",
+        "cold": "Kalt",
+        "dish": "Gericht",
+        "potatoes": "Kartoffeln",
+        "baking": "Backen",
+        "meat": "Fleisch",
+        "barley": "Gerste",
+        "cakes": "Kuchen",
+        "oven": "Aus dem Ofen",
+        "potato": "Kartoffel",
+        "noodle": "Nudeln",
+        "cheese": "Käse",
+        "drink": "Getränk"
+    }
+}

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "preserve",
     "strictNullChecks": true,
-    "allowJs": true
+    "allowJs": true,
+     "resolveJsonModule": true
   }
 }

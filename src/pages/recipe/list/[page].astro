@@ -1,39 +1,44 @@
 ---
-import Layout from '../../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
-
-import PostList from '../../../components/PostList.astro'
-import TagList from '../../../components/TagList.astro'
-import Pagination from '../../../components/Pagination.astro'
-import Container from '../../../components/Container.astro'
-import RecipeHeader from '../../../components/RecipeHeader.astro'
-
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import type { Page } from "astro";
+import PostList from "../../../components/PostList.astro";
+import TagList from "../../../components/TagList.astro";
+import Pagination from "../../../components/Pagination.astro";
+import Container from "../../../components/Container.astro";
+import RecipeHeader from "../../../components/RecipeHeader.astro";
 
 export async function getStaticPaths({ paginate }: any) {
-  const allPosts = await getCollection('recipes')
+  // ✅ EN only
+  const allPosts = await getCollection("recipes", (p) => p.slug.startsWith("en/"));
 
-  return paginate(allPosts, {
-    pageSize: 4
-  })
+  return paginate(allPosts, { pageSize: 4 });
 }
 
-const { page } = Astro.props
-const allPosts = await getCollection('recipes')
+type Props = {
+  page: Page<CollectionEntry<"recipes">>;
+};
 
-const posts = page['data']
-const allTags = allPosts.flatMap((post) => post.data.tags)
-const tags = Array.from(new Set(allTags))
+const { page } = Astro.props as Props;
+
+// ✅ EN only (for tags)
+const allPosts = await getCollection("recipes", (p) => p.slug.startsWith("en/"));
+
+const posts = page.data;
+
+const allTags = allPosts.flatMap((post) => post.data.tags);
+const tags = Array.from(new Set(allTags));
 ---
 
-<Layout title='Recipes' active='recipes'>
+<Layout title="Recipes" active="recipes">
   <Container>
     <RecipeHeader />
 
-    <div class='mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1'>
-      <TagList tags={tags} title='Tags' />
+    <div class="mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1">
+      <TagList tags={tags} title="Tags" />
     </div>
 
-    <div class='mb-32'>
+    <div class="mb-32">
       <PostList posts={posts} />
     </div>
 

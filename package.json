@@ -1,7 +1,7 @@
 {
   "name": "astro-recipe-website",
   "type": "module",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
     "@typescript-eslint/parser": "^8.6.0",
+    "baseline-browser-mapping": "^2.9.14",
     "eslint": "^9.11.0",
     "eslint-config-ts-standard": "^1.0.5",
     "eslint-plugin-astro": "^1.2.4",

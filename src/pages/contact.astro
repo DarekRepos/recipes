@@ -1,32 +1,5 @@
 ---
-import Container from '../components/Container.astro'
-import EmailForm from '../components/EmailForm.vue';
-import Layout from '../layouts/Layout.astro'
+import ContactPage from "../components/pages/ContactPage.astro";
+
 ---
-
-<Layout title='Contact' active='contact'>
-  <Container>
-    <div class='mx-auto max-w-3xl px-6 py-12'>
-      <div class='contact-intro mb-8 rounded-lg bg-white p-8 shadow-md'>
-        <h2 class='mb-4 text-2xl font-bold text-yellow-900'>I'd Love to Hear From You!</h2>
-        <p class='mb-4'>
-          Thank you for visiting my website dedicated to the rich and delicious world of traditional
-          Polish cuisine. Whether you're a lifelong fan of pierogi, a newcomer curious about bigos,
-          or someone with a family recipe to share, I want to connect with you!
-        </p>
-        <p class='mb-4'>
-          Do you have questions about my recipes? Looking for cooking tips or recommendations on
-          where to find authentic ingredients? Maybe you have your own Polish food stories and
-          traditions that you'd like to share with me. Whatever it is, I’m excited to hear from you!
-        </p>
-        <p class='mb-4'>
-          Please fill out the form below to get in touch. Your feedback, questions, and stories are
-          invaluable to me, and I can't wait to respond.
-        </p>
-        <p class='font-semibold'>Smacznego!<br />Darek</p>
-      </div>
-
-      <EmailForm client:load />
-    </div>
-  </Container>
-</Layout>
+<ContactPage />

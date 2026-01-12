@@ -10,5 +10,9 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: 'https://DarekRepos.github.io/recipes/',
   base: '/recipes',
-  integrations: [tailwind(), icon(), vue(), mdx(), sitemap()]
+  integrations: [tailwind(), icon(), vue(), mdx(), sitemap()],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "pl", "de"],
+  },
 });
