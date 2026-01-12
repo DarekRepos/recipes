@@ -1,15 +1,5 @@
 ---
-import { getCollection } from 'astro:content'
-import CardBorderLand from '../components/CardBorderLand.astro'
-import Container from '../components/Container.astro'
-import Layout from '../layouts/Layout.astro'
-const items = await getCollection('borderland')
----
+import BorderLandPage from "../components/pages/BorderLandPage.astro";
 
-<Layout title='Eastern borderlands' active='bordeland'>
-  <Container>
-    <section id='introduction' class='grid gap-8 overflow-hidden py-16'>
-      {items.map((item) => <CardBorderLand item={item} />)}
-    </section>
-  </Container>
-</Layout>
+---
+<BorderLandPage />

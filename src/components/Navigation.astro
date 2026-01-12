@@ -1,5 +1,61 @@
 ---
 const { active } = Astro.props
+
+import { getTranslation } from "../i18n";
+
+
+const locales = ['en', 'pl', 'de'] as const
+const defaultLocale = 'en'
+type Locale = (typeof locales)[number]
+
+const currentLocale: Locale = (Astro.currentLocale ?? defaultLocale) as Locale
+const t = getTranslation(currentLocale);
+
+// If you have base: "/recipes" in astro.config.mjs,
+// import.meta.env.BASE_URL will usually be "/recipes/" (with trailing slash)
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '') // "/recipes" or ""
+const pathname = Astro.url.pathname // e.g. "/recipes/pl/contact" or "/recipes/contact"
+
+// 1) Remove base prefix ("/recipes") if present
+function stripBase(path: string) {
+  if (!BASE) return path
+  return path.startsWith(BASE + '/') ? path.slice(BASE.length) : path
+}
+
+// 2) Remove any existing locale prefix from the remaining path
+function stripLocale(path: string) {
+  // path here starts with "/" (e.g. "/pl/contact" or "/contact")
+  for (const l of locales) {
+    if (path === `/${l}`) return '/'
+    if (path.startsWith(`/${l}/`)) return path.slice(l.length + 1) // remove "/{l}"
+  }
+  return path
+}
+
+// 3) Build final URL: base + (locale prefix if not default) + clean path
+function buildLocaleUrl(target: Locale) {
+  const noBase = stripBase(pathname) // "/pl/contact" or "/contact"
+  const clean = stripLocale(noBase) || '/' // "/contact"
+  const prefix = target === defaultLocale ? '' : `/${target}`
+  return `${BASE}${prefix}${clean}`
+}
+
+const switcherLinks = locales.map((l) => ({
+  locale: l,
+  href: buildLocaleUrl(l)
+}))
+
+
+
+// Build URL for current locale.
+// Pass paths WITHOUT "/recipes" prefix, e.g. "/", "/about", "/contact"
+function navHref(path: string) {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  const prefix = currentLocale === defaultLocale ? "" : `/${currentLocale}`;
+  // "/recipes" + "/pl" + "/about" => "/recipes/pl/about"
+  // "/recipes" + "" + "/about" => "/recipes/about"
+  return `${BASE}${prefix}${normalized}`;
+}
 ---
 
 <nav>
@@ -12,47 +68,66 @@ const { active } = Astro.props
   </div>
   <div class='flex flex-col p-5 lg:flex-row'>
     <ul
-      class='links hidden w-full flex-col text-center max-lg:space-y-4 lg:flex lg:flex-row lg:justify-around lg:space-x-4'
+      class='links max-lg:space-y-4 hidden w-full flex-col text-center lg:flex lg:flex-row lg:justify-around lg:space-x-4'
     >
       <li>
         <a
-          href='/recipes'
+           href={navHref("/")}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'home' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
-          Home
+          {t.nav.home}
         </a>
       </li>
       <li>
         <a
-          href='/recipes/borderland'
+          href={navHref("/borderland")}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'bordeland' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
-          Borderland
+         {t.nav.borderland}
         </a>
       </li>
       <li>
         <a
-          href='/recipes/recipe/list/1'
+          href={navHref("/recipe/list/1")}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'recipes' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
-          Recipes
+          {t.nav.recipes}
         </a>
       </li>
       <li>
         <a
-          href='/recipes/about'
+          href={navHref("/about")}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'about' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
-          About
+          {t.nav.about}
         </a>
       </li>
       <li>
         <a
-          href='/recipes/contact'
+          href={navHref("/contact")}
           class={`block rounded-xl px-6 py-3 text-xl text-white  opacity-70 hover:opacity-100 duration-300 ${active === 'contact' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
-          Contact
+          {t.nav.contact}
         </a>
+      </li>
+      <!-- ✅ language switcher -->
+      <li class='flex items-center justify-center gap-2 lg:ml-2'>
+        {
+          switcherLinks.map(({ locale, href }) => (
+            <a
+              href={href}
+              aria-current={locale === currentLocale ? 'page' : undefined}
+              onclick={`localStorage.setItem("preferred-locale", "${locale}")`}
+              class={`rounded-lg px-3 py-2 text-sm font-semibold text-white duration-300 ${
+                locale === currentLocale
+                  ? 'bg-yellow-600'
+                  : 'bg-yellow-900 opacity-80 hover:opacity-100'
+              }`}
+            >
+              {locale.toUpperCase()}
+            </a>
+          ))
+        }
       </li>
     </ul>
   </div>

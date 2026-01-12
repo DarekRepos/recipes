@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content'
+import CardBorderLand from '../../components/CardBorderLand.astro'
+import Container from '../../components/Container.astro'
+import Layout from '../../layouts/Layout.astro'
+
+import { getTranslation } from "../../i18n";
+import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
+
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
+const t = getTranslation(locale);
+
+const items = await getCollection("borderland", (entry) =>
+  entry.id.startsWith(`${locale}/`)
+);
+---
+
+<Layout title={t.borderland.title} active='bordeland'>
+  <Container>
+    <section id='introduction' class='grid gap-8 overflow-hidden py-16'>
+      {items.map((item) => <CardBorderLand item={item} />)}
+    </section>
+  </Container>
+</Layout>

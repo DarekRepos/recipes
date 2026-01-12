@@ -1,0 +1,10 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { locale: "pl" } },
+    { params: { locale: "de" } },
+  ];
+}
+import HomePage from "../../components/pages/HomePage.astro";
+---
+<HomePage />

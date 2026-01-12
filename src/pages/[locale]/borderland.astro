@@ -1,0 +1,12 @@
+---
+export function getStaticPaths() {
+  return [
+    { params: { locale: "pl" } },
+    { params: { locale: "de" } },
+  ];
+}
+
+import BorderLandPage from "../../components/pages/BorderLandPage.astro";
+
+---
+<BorderLandPage />

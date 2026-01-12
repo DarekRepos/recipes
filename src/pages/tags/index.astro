@@ -1,25 +1,38 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-import TagList from '../../components/TagList.astro'
-import Container from '../../components/Container.astro'
-import RecipeHeader from '../../components/RecipeHeader.astro'
+import Container from "../../components/Container.astro";
+import RecipeHeader from "../../components/RecipeHeader.astro";
+import Tag from "../../components/Tag.astro";
 
+import { getTranslation } from "../../i18n";
+import { DEFAULT_LOCALE } from "../../i18n/locales";
 
-const allPosts = await getCollection('recipes')
-const allTags = allPosts.flatMap((post) => post.data.tags)
-const tags = Array.from(new Set(allTags))
+const t = getTranslation(DEFAULT_LOCALE);
 
+// EN-only posts
+const allPosts = await getCollection("recipes", (p) => p.slug.startsWith("en/"));
+
+// unique canonical tag keys
+const tagKeys = Array.from(
+  new Set(allPosts.flatMap((post) => post.data.tags.map((x) => String(x).toLowerCase())))
+).sort();
+
+const tagsTitle = t.common?.tags ?? "Tags";
+const pageTitle = t.nav?.recipes ?? "Recipes";
 ---
 
-<Layout title='Recipes' active='recipes'>
+<Layout title={pageTitle} active="recipes">
   <Container>
     <RecipeHeader />
 
-    <div class='mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1'>
-      <TagList tags={tags} title='Tags' />
+    <div class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1">
+      <h2 class="font-bold text-5xl text-yellow-800">{tagsTitle}</h2>
+
+      <div class="flex gap-4 flex-wrap justify-center items-center">
+        {tagKeys.map((key) => <Tag tag={key} />)}
+      </div>
     </div>
-    
   </Container>
 </Layout>

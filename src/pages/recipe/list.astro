@@ -1,28 +1,35 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import { getCollection } from 'astro:content'
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-import PostList from '../../components/PostList.astro'
-import TagList from '../../components/TagList.astro'
-import Container from '../../components/Container.astro'
-import RecipeHeader from '../../components/RecipeHeader.astro'
+import PostList from "../../components/PostList.astro";
+import TagList from "../../components/TagList.astro";
+import Container from "../../components/Container.astro";
+import RecipeHeader from "../../components/RecipeHeader.astro";
 
+import { getTranslation } from "../../i18n";
+import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
 
-const allPosts = await getCollection('recipes')
-const allTags = allPosts.flatMap((post) => post.data.tags)
-const tags = Array.from(new Set(allTags))
+// EN page (no locale prefix) should show EN content
+const locale: Locale = DEFAULT_LOCALE;
+const t = getTranslation(locale);
 
+// ✅ only EN recipes
+const allPosts = await getCollection("recipes", (p) => p.slug.startsWith("en/"));
+
+const allTags = allPosts.flatMap((post) => post.data.tags);
+const tags = Array.from(new Set(allTags));
 ---
 
-<Layout title='Recipes' active='recipes'>
+<Layout title={t.nav?.recipes ?? "Recipes"} active="recipes">
   <Container>
     <RecipeHeader />
 
-    <div class='mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1'>
-      <TagList tags={tags} title='Tags' />
+    <div class="mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1">
+      <TagList tags={tags} title={t.common?.tags ?? "Tags"} />
     </div>
 
-    <div class='mb-32'>
+    <div class="mb-32">
       <PostList posts={allPosts} />
     </div>
   </Container>

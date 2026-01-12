@@ -1,0 +1,118 @@
+{
+    "contact": {
+        "title": "Kontakt",
+        "heading": "Chętnie się z Tobą skontaktuję!",
+        "intro1": "Dziękuję za odwiedzenie mojej strony poświęconej bogatemu i pysznemu światu tradycyjnej kuchni polskiej. Niezależnie od tego, czy jesteś wielkim fanem pierogów, ciekawym nowicjuszem bigosu, czy masz rodzinny przepis do podzielenia się — chcę się z Tobą skontaktować!",
+        "intro2": "Masz pytania dotyczące moich przepisów? Szukasz porad kulinarnych lub wskazówek, gdzie znaleźć autentyczne składniki? A może masz własne historie i tradycje kulinarne, którymi chcesz się podzielić. Cokolwiek to jest — z przyjemnością Cię wysłucham!",
+        "intro3": "Wypełnij poniższy formularz kontaktowy. Twoje opinie, pytania i historie są dla mnie niezwykle cenne i nie mogę się doczekać odpowiedzi.",
+        "signature": "Smacznego!",
+        "author": "Darek"
+    },
+    "form": {
+        "nameLabel": "Twoje imię",
+        "namePlaceholder": "twoje imię",
+        "nameError": "Wpisz proszę swoje imię",
+        "emailLabel": "Adres e-mail",
+        "emailPlaceholder": "name@example.com",
+        "emailError": "Wpisz poprawny adres e-mail",
+        "messageLabel": "Twoja wiadomość",
+        "messagePlaceholder": "napisz tutaj wiadomość",
+        "messageError": "Wpisz proszę wiadomość",
+        "submit": "Wyślij",
+        "success": "Twoja wiadomość została wysłana!",
+        "alertSuccess": "E-mail został wysłany!",
+        "alertFail": "Nie udało się wysłać e-maila."
+    },
+    "about": {
+        "title": "O mnie",
+        "heading": "Kulinarna podróż",
+        "intro1": "Gotowanie to nie tylko sposób na osiągnięcie celu — to droga do szczęścia, forma medytacji, która przynosi spełnienie i radość. W coraz szybszym i bardziej stresującym świecie, prosta czynność przygotowywania posiłku stała się dla wielu azylem, również dla mnie. To miejsce, w którym odnajduję spokój, relaks i energię do dalszego działania.",
+        "labelJourney": "Podróż",
+        "labelTradition": "Tradycja",
+        "labelRecipes": "Przepisy",
+        "intro2": "Kuchnia to coś więcej niż miejsce do gotowania — to przestrzeń, w której czas zdaje się zatrzymywać. Pośród zgiełku współczesnego życia jest to moja przystań, miejsce tworzenia, eksperymentowania i odżywiania zarówno ciała, jak i duszy. Dołącz do mnie w tej kulinarnej podróży, gdzie każdy przepis opowiada historię, a każde danie powstaje z miłością."
+    },
+    "notFound": {
+        "title": "404",
+        "heading": "Strona nie została znaleziona 👀",
+        "button": "Wróć na stronę główną"
+    },
+    "borderland": {
+        "title": "Kresy Wschodnie"
+    },
+    "footer": {
+        "freeIcons": "Ikony gotowania stworzone przez Freepik - Flaticon",
+        "copyright": "© Stworzone z pasją w {year} przez DarekRepos. Wszelkie prawa zastrzeżone."
+    },
+    "nav": {
+        "home": "Strona główna",
+        "borderland": "Kresy",
+        "recipes": "Przepisy",
+        "about": "O mnie",
+        "contact": "Kontakt"
+    },
+    "home": {
+        "title": "Strona główna",
+        "intro": {
+            "quote": "To magiczne, cudowne jedzenie na naszym talerzu, to pożywienie, które przyswajamy, ma swoją historię. Ma swoją podróż.",
+            "author": "Amerykański rolnik, wykładowca i autor",
+            "authorName": "Joel Salatin"
+        },
+        "inspire": {
+            "title": "Kulinarna podróż",
+            "text": "Mam nadzieję, że ta strona nie tylko zainspiruje Cię w kuchni do odkrywania smaków dawnych pokoleń, ale pozwoli Ci – choćby na chwilę – poczuć wyjątkowy zapach zapomnianych Kresów.",
+            "imageAlt": "Kilka potraw przygotowanych przez kucharza na stole"
+        },
+        "gallery": {
+            "imageAlt": "Najbardziej charakterystyczne elementy Kresów: potrawy, składniki i krajobraz"
+        }
+    },
+    "common": {
+        "readMore": "Czytaj więcej",
+        "tags": "Tagi"
+    },
+    "authorsPage": {
+        "back": "Wróć do pierwszej strony",
+        "heading": "Przepisy od {name}"
+    },
+    "authors": {
+        "book-recipe": "Przepisy z książki",
+        "traditional-recipe": "Tradycyjny przepis z Kresów"
+    },
+    "recipesHeader": {
+        "title": "Zapomniane przepisy",
+        "subtitle": "Czy ktoś jeszcze pamięta smak kresowych specjałów?"
+    },
+    "pagination": {
+        "previous": "Poprzednia",
+        "next": "Następna",
+        "page": "Strona"
+    },
+    "recipesPage": {
+        "backToList": "Wróć do pierwszej strony"
+    },
+    "tagsPage": {
+        "titleSuffix": "Zapomniane przepisy",
+        "description": "Tagi i przepisy",
+        "back": "Wróć do pierwszej strony",
+        "heading": "Przepisy oznaczone tagiem:",
+        "empty": "Nie znaleziono przepisów z tym tagiem"
+    },
+    "tags": {
+        "vegetarian": "Wegetariańskie",
+        "roll": "Bułka",
+        "soup": "Zupa",
+        "cold": "Na zimno",
+        "dish": "Danie",
+        "potatoes": "Ziemniaki",
+        "baking": "Wypieki",
+        "meat": "Mięso",
+        "barley": "Kasza jęczmienna",
+        "cakes": "Ciasta",
+        "oven": "Z piekarnika",
+        "potato": "Ziemniak",
+        "noodle": "Makaron",
+        "cheese": "Ser",
+        "drink": "Napój"
+    }
+}

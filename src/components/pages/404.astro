@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import MyButton from '../../components/buttons/MyButton.astro'
+import { getTranslation } from "../../i18n";
+import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
+
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
+const t = getTranslation(locale);
+---
+
+
+<Layout active="404">
+  <div class="flex min-h-screen items-center justify-center">
+    <div class="text-center">
+      <h1 class="text-6xl font-bold text-yellow-800">
+        {t.notFound.title}
+      </h1>
+
+      <h2 class="mt-4 text-2xl text-gray-600">
+        {t.notFound.heading}
+      </h2>
+
+      <div class="mt-6">
+        <MyButton href="/recipes/" children={t.notFound.button} />
+      </div>
+    </div>
+  </div>
+</Layout>

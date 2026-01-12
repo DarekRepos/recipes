@@ -1,0 +1,95 @@
+---
+import { getCollection } from "astro:content";
+
+import PostList from "../../../../components/PostList.astro";
+import Layout from "../../../../layouts/Layout.astro";
+import Container from "../../../../components/Container.astro";
+import RecipeHeader from "../../../../components/RecipeHeader.astro";
+
+import { getTranslation } from "../../../../i18n";
+import { DEFAULT_LOCALE, type Locale } from "../../../../i18n/locales";
+
+type AstroProps = { tag: string };
+
+export async function getStaticPaths() {
+  const locales = ["pl", "de"] as const;
+  const allPosts = await getCollection("recipes");
+
+  const paths: { params: { locale: string; tag: string }; props: { tag: string } }[] = [];
+
+  for (const locale of locales) {
+    const posts = allPosts.filter((p) => p.slug.startsWith(`${locale}/`));
+
+    const tags = new Set<string>();
+    posts.forEach((post) => {
+      post.data.tags.forEach((tag) => tags.add(String(tag).toLowerCase()));
+    });
+
+    for (const tag of tags) {
+      paths.push({ params: { locale, tag }, props: { tag } });
+    }
+  }
+
+  return paths;
+}
+
+const { tag } = Astro.props as AstroProps;
+
+const locale = (Astro.params.locale ?? DEFAULT_LOCALE) as Locale;
+const t = getTranslation(locale);
+
+// posts only for this locale
+const allPosts = await getCollection("recipes", (p) => p.slug.startsWith(`${locale}/`));
+const tagKey = tag.toLowerCase();
+
+const posts = allPosts.filter((post) =>
+  post.data.tags.some((pt) => String(pt).toLowerCase() === tagKey)
+);
+
+// base-aware hrefs
+const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
+const listHref = `${BASE}/${locale}/recipe/list/1`;
+const tagsIndexHref = `${BASE}/${locale}/tags/`;
+
+// UI labels
+const tagsDict = (t.tags as Record<string, string> | undefined) ?? {};
+const tagLabel = tagsDict[tagKey] ?? tagKey;
+
+const pageTitle = `${tagLabel} - ${t.tagsPage?.titleSuffix ?? "The forgotten recipes"}`;
+const pageDescription = t.tagsPage?.description ?? "Tags and recipes";
+const backLabel = t.tagsPage?.back ?? "Back to first page";
+const headingLabel = t.tagsPage?.heading ?? "Recipes tagged:";
+const emptyLabel = t.tagsPage?.empty ?? "No recipes were found with that tag";
+---
+
+<Layout title={pageTitle} description={pageDescription} active="recipes">
+  <Container>
+    <div>
+      <a href={listHref} class="mb-16 block text-2xl text-zinc-500 underline">
+        ← {backLabel}
+      </a>
+
+      <RecipeHeader />
+
+      {tagKey && (
+        <h2 class="text-5xl font-bold text-yellow-800 mb-16">
+          {headingLabel}{" "}
+          <span class="whitespace-nowrap rounded-3xl border-2 border-yellow-800 p-2 text-xl uppercase text-yellow-800">
+            {tagLabel}
+          </span>
+        </h2>
+      )}
+
+      {posts.length === 0 ? (
+        <>
+          <p class="mb-6">{emptyLabel}</p>
+          <a href={tagsIndexHref} class="underline text-yellow-800">
+            ← Tags
+          </a>
+        </>
+      ) : (
+        <PostList posts={posts} />
+      )}
+    </div>
+  </Container>
+</Layout>
