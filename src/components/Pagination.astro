@@ -1,28 +1,43 @@
 ---
-const {page} = Astro.props
----
+import { getTranslation } from "../i18n";
+import { DEFAULT_LOCALE, type Locale } from "../i18n/locales";
 
-<div class="flex justify-between">
-    {
-        page.start > 0 &&  (
-            <a
-                href={`/recipes/recipe/list/${page.currentPage-1}`}
-                class="bg-yellow-900 text-white py-3 px-6 rounded-xl text-xl opacity-70 hover:opacity-100 duration-300"
-            >
-                Previous
-            </a>
-        ) 
-    }
-    <div class="bg-yellow-600 text-white py-3 px-6 rounded-xl text-xl opacity-70 hover:opacity-100 duration-300"
-    >Page {page.currentPage}</div>
-    {
-       page.currentPage < page.lastPage && (
-            <a
-                href={`/recipes/recipe/list/${page.currentPage+1}`}
-                class="bg-yellow-900 text-white py-3 px-6 rounded-xl text-xl opacity-70 hover:opacity-100 duration-300"
-            >
-                Next
-            </a>
-        )
-    }
+const { page } = Astro.props;
+
+// locale
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
+const t = getTranslation(locale);
+
+// base (/recipes)
+const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
+
+// locale prefix
+const prefix = locale === DEFAULT_LOCALE ? "" : `/${locale}`;
+
+// build URLs
+const prevHref = `${BASE}${prefix}/recipe/list/${page.currentPage - 1}`;
+const nextHref = `${BASE}${prefix}/recipe/list/${page.currentPage + 1}`;
+---
+<div class="flex justify-between items-center">
+  {page.start > 0 && (
+    <a
+      href={prevHref}
+      class="bg-yellow-900 text-white py-3 px-6 rounded-xl text-xl opacity-70 hover:opacity-100 duration-300"
+    >
+      {t.pagination.previous}
+    </a>
+  )}
+
+  <div class="bg-yellow-600 text-white py-3 px-6 rounded-xl text-xl opacity-70 hover:opacity-100 duration-300">
+    {t.pagination.page} {page.currentPage}
+  </div>
+
+  {page.currentPage < page.lastPage && (
+    <a
+      href={nextHref}
+      class="bg-yellow-900 text-white py-3 px-6 rounded-xl text-xl opacity-70 hover:opacity-100 duration-300"
+    >
+      {t.pagination.next}
+    </a>
+  )}
 </div>

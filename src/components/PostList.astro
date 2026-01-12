@@ -1,15 +1,28 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-
-import Post from './Post.astro'
+import type { CollectionEntry } from "astro:content";
+import Post from "./Post.astro";
 
 type Props = {
-  posts: CollectionEntry<'recipes'>[]
-}
+  posts: CollectionEntry<"recipes">[];
+};
 
-const { posts } = Astro.props
+const { posts } = Astro.props;
+
+const defaultLocale = "en";
+const currentLocale = Astro.currentLocale ?? defaultLocale;
+
+// "/recipes" if base is set, otherwise ""
+const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
+
+// "/pl" or "/de" or ""
+const localePrefix = currentLocale === defaultLocale ? "" : `/${currentLocale}`;
+
+// ✅ pass this down to Post
+const hrefPrefix = `${BASE}${localePrefix}`;
 ---
 
-  <div class='grid grid-cols-2 gap-x-16 gap-y-32 max-md:grid-cols-1 max-sm:gap-y-14'>
-    {posts.map((post) => <Post post={post} />)}
-  </div>
+<div class="grid grid-cols-2 gap-x-16 gap-y-32 max-md:grid-cols-1 max-sm:gap-y-14">
+  {posts.map((post) => (
+    <Post post={post} hrefPrefix={hrefPrefix} />
+  ))}
+</div>

@@ -5,12 +5,26 @@ import { Image } from 'astro:assets'
 type Props = {
   item: CollectionEntry<'introduction'>
   index: number
+  readMoreLabel: string
 }
 
-const { item, index } = Astro.props
+const { item, index, readMoreLabel } = Astro.props
 
 function isOdd(num: number): boolean {
   return num % 2 !== 0
+}
+
+const locales = ['en', 'pl', 'de'] as const
+const defaultLocale = 'en'
+type Locale = (typeof locales)[number]
+const currentLocale: Locale = (Astro.currentLocale ?? defaultLocale) as Locale
+
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
+
+function localeHref(path: string) {
+  const normalized = path.startsWith('/') ? path : `/${path}`
+  const prefix = currentLocale === defaultLocale ? '' : `/${currentLocale}`
+  return `${BASE}${prefix}${normalized}`
 }
 ---
 
@@ -23,19 +37,19 @@ function isOdd(num: number): boolean {
   >
     <div class='mx-auto px-6 sm:max-w-[500px]'>
       <h1
-        class='font-fraunces text-ss-very-dark-desaturated-blue text-3xl font-bold sm:text-[2.5rem] sm:leading-tight text-yellow-800'
+        class='font-fraunces text-ss-very-dark-desaturated-blue text-3xl font-bold text-yellow-800 sm:text-[2.5rem] sm:leading-tight'
       >
         {item.data.title}
       </h1>
       <p class='text-body text-ss-dark-grayish-blue mb-8 mt-6'>
         {item.data.description}
       </p>
-      <div class="flex cursor-pointer flex-col items-center sm:items-start">
+      <div class='flex cursor-pointer flex-col items-center sm:items-start'>
         <a
-          href="/recipes/borderland"
-          class="whitespace-nowrap rounded-3xl border-2 border-yellow-800 py-2 px-4 text-xl uppercase text-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+           href={localeHref(`/introduction/${item.data.id}`)}
+          class='whitespace-nowrap rounded-3xl border-2 border-yellow-800 px-4 py-2 text-xl uppercase text-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-500'
         >
-          Read more
+          {readMoreLabel}
         </a>
       </div>
     </div>

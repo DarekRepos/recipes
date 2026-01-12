@@ -1,7 +1,10 @@
 ---
-import ScrollButton from "../buttons/ScrollButton.astro";
+import ScrollButton from '../buttons/ScrollButton.astro'
+import { getTranslation } from "../../i18n";
+import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
 
-
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
+const t = getTranslation(locale);
 ---
 
 <section
@@ -12,18 +15,15 @@ import ScrollButton from "../buttons/ScrollButton.astro";
       class='text-shadow-2xl flex flex-col items-center font-special-elite text-custom-yellow'
     >
       <blockquote class='relative mx-auto max-w-xs p-2 text-2xl font-bold'>
-        <p>
-          This magical, marvelous food on our plate, this sustenance we absorb, has a story to tell.
-          It has a journey.
-        </p>
+        <p>{t.home.intro.quote}</p>
         <span class='absolute left-[-0.5rem] top-[-2rem] text-6xl'>&ldquo;</span>
         <span class='absolute bottom-[0.125rem] right-[-0.5rem] text-6xl'>&rdquo;</span>
       </blockquote>
       <figcaption class='text-white'>
-        American farmer, lecturer, and author<br /><cite title='Source Title'>Joel Salatin</cite>
+        {t.home.intro.author}<br /><cite title='Source Title'>{t.home.intro.authorName}</cite>
       </figcaption>
     </figure>
-    <ScrollButton/>
+    <ScrollButton />
   </div>
 </section>
 <style lang='scss'>

@@ -1,6 +1,11 @@
 ---
 import { Image } from 'astro:assets'
 import culinaryJourneyImage from '../../assets/journey.png';
+import { getTranslation } from "../../i18n";
+import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
+
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
+const t = getTranslation(locale);
 ---
 <section class="py-16 text-center xl:py-[10.67rem] xl:pb-[12.27rem]">
     <div class="container mx-auto">
@@ -8,7 +13,7 @@ import culinaryJourneyImage from '../../assets/journey.png';
         <div class="mx-auto flex-1 xl:h-[33.33rem]">
             <Image 
               src={culinaryJourneyImage} 
-              alt="A few dishes prepared from chef on the table" 
+                alt={t.home.inspire.imageAlt} 
               sizes="(max-width: 767px) 711px, 731px" 
               class="mx-auto rounded-xl w-full h-full object-cover"
             />
@@ -16,11 +21,9 @@ import culinaryJourneyImage from '../../assets/journey.png';
         <div
           class="px-4 pt-8 xl:relative xl:-ml-[10.73rem] xl:flex-1 xl:self-end xl:bg-white xl:pl-16 xl:pt-16"
         >
-          <h2 class="text-[2.13rem] xl:text-[3.2rem]">A Culinary Journey</h2>
+          <h2 class="text-[2.13rem] xl:text-[3.2rem]"> {t.home.inspire.title}</h2>
           <p class="pt-[1.07rem] leading-[1.67] opacity-50 lg:pt-[1.67rem]">
-            I hope that this website will not only inspire you in the kitchen to rediscover the tastes
-            of older generations but will allow you, if only for a moment, to experience the unique
-            smell of the forgotten Kresy region.
+           {t.home.inspire.text}
           </p>
         </div>
       </div>
