@@ -1,16 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import IntroductionPage from "../../components/pages/IntroductionPage.astro";
+import { getCollection } from 'astro:content'
+import IntroductionPage from '../../components/pages/IntroductionPage.astro'
 
 export async function getStaticPaths() {
-  const items = await getCollection("introductioncards", (entry) =>
-    entry.id.startsWith("en/")
-  );
+  const items = await getCollection('introductioncards', (entry) => entry.id.startsWith('en/'))
 
   return items.map((entry) => ({
     params: { id: String(entry.data.id) }
-  }));
+  }))
 }
 ---
 
-<IntroductionPage locale="en" id={Astro.params.id} />
+<IntroductionPage locale='en' id={Astro.params.id} />

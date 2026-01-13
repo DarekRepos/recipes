@@ -1,70 +1,69 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry } from 'astro:content'
 
-import Layout from "../../../layouts/Layout.astro";
-import PostList from "../../../components/PostList.astro";
-import Container from "../../../components/Container.astro";
+import Layout from '../../../layouts/Layout.astro'
+import PostList from '../../../components/PostList.astro'
+import Container from '../../../components/Container.astro'
 
-import { getTranslation } from "../../../i18n";
-import { DEFAULT_LOCALE, type Locale } from "../../../i18n/locales";
+import { getTranslation } from '../../../i18n'
+import { DEFAULT_LOCALE, type Locale } from '../../../i18n/locales'
 
 export async function getStaticPaths() {
-  const locales = ["pl", "de"] as const;
+  const locales = ['pl', 'de'] as const
 
-  const authors = await getCollection("authors");
+  const authors = await getCollection('authors')
 
-  const paths = [];
+  const paths = []
   for (const locale of locales) {
     for (const a of authors) {
-      paths.push({ params: { locale, slug: a.slug } });
+      paths.push({ params: { locale, slug: a.slug } })
     }
   }
-  return paths;
+  return paths
 }
 
-const { locale, slug } = Astro.params;
+const { locale, slug } = Astro.params
 
-const lang = (locale ?? DEFAULT_LOCALE) as Locale;
-const t = getTranslation(lang);
+const lang = (locale ?? DEFAULT_LOCALE) as Locale
+const t = getTranslation(lang)
 
-const author = await getEntry("authors", slug as string);
-if (!author) return Astro.redirect("/404");
+const author = await getEntry('authors', slug as string)
+if (!author) return Astro.redirect('/404')
 
 // ✅ helper: typed author keys (dopasuj jeśli dodasz kolejnych)
-type AuthorKey = "book-recipe" | "traditional-recipe";
+type AuthorKey = 'book-recipe' | 'traditional-recipe'
 function isAuthorKey(x: string): x is AuthorKey {
-  return x === "book-recipe" || x === "traditional-recipe";
+  return x === 'book-recipe' || x === 'traditional-recipe'
 }
 
-const authorKeyRaw = String(slug).trim();
+const authorKeyRaw = String(slug).trim()
 
 // ✅ localized label with fallback
-const authorLabel =
-  isAuthorKey(authorKeyRaw) ? t.authors[authorKeyRaw] : author.data.name;
+const authorLabel = isAuthorKey(authorKeyRaw) ? t.authors[authorKeyRaw] : author.data.name
 
 // ✅ only recipes for this locale AND for this author key
-const allPosts = await getCollection("recipes", (p) => p.slug.startsWith(`${lang}/`));
-const posts = allPosts.filter((post) => String(post.data.author).trim() === authorKeyRaw);
+const allPosts = await getCollection('recipes', (p) => p.slug.startsWith(`${lang}/`))
+const posts = allPosts.filter((post) => String(post.data.author).trim() === authorKeyRaw)
 
 // base helper
-const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
-const listHref = `${BASE}/${lang}/recipe/list/1`;
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
+const listHref = `${BASE}/${lang}/recipe/list/1`
 
 // ✅ heading uses localized authorLabel
-const heading = t.authorsPage.heading.replace("{name}", authorLabel);
+const heading = t.authorsPage.heading.replace('{name}', authorLabel)
 ---
 
-<Layout title={authorLabel} active="recipes">
+<Layout title={authorLabel} active='recipes'>
   <Container>
-    <div class="mb-16 text-2xl text-zinc-500">
-      ← <a href={listHref} class="underline">{t.authorsPage.back}</a>
+    <div class='mb-16 text-2xl text-zinc-500'>
+      ← <a href={listHref} class='underline'>{t.authorsPage.back}</a>
     </div>
 
-    <p class="mb-16 text-6xl font-bold text-yellow-800">
+    <p class='mb-16 text-6xl font-bold text-yellow-800'>
       {heading}
     </p>
 
-    <div class="mb-60">
+    <div class='mb-60'>
       <PostList posts={posts} />
     </div>
   </Container>

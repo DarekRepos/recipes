@@ -1,12 +1,9 @@
 ---
 export function getStaticPaths() {
-  return [
-    { params: { locale: "pl" } },
-    { params: { locale: "de" } },
-  ];
+  return [{ params: { locale: 'pl' } }, { params: { locale: 'de' } }]
 }
 
-import BlankPage from "../../components/pages/404.astro";
-
+import BlankPage from '../../components/pages/404.astro'
 ---
+
 <BlankPage />

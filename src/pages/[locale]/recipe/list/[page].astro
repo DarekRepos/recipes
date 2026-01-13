@@ -1,51 +1,57 @@
 ---
-import Layout from "../../../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import Layout from '../../../../layouts/Layout.astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import type { GetStaticPaths, GetStaticPathsResult, Page } from 'astro'
+import PostList from '../../../../components/PostList.astro'
+import TagList from '../../../../components/TagList.astro'
+import Pagination from '../../../../components/Pagination.astro'
+import Container from '../../../../components/Container.astro'
+import RecipeHeader from '../../../../components/RecipeHeader.astro'
 
-import PostList from "../../../../components/PostList.astro";
-import TagList from "../../../../components/TagList.astro";
-import Pagination from "../../../../components/Pagination.astro";
-import Container from "../../../../components/Container.astro";
-import RecipeHeader from "../../../../components/RecipeHeader.astro";
-
-export async function getStaticPaths({ paginate }: any) {
-  const locales = ["pl", "de"]; // ✅ define inside
-  const allPosts = await getCollection("recipes", (p) =>
+type Recipe = CollectionEntry<'recipes'>
+type Props = {
+  page: Page<Recipe>
+}
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const locales = ['pl', 'de'] // ✅ define inside
+  const allPosts = await getCollection('recipes', (p) =>
     locales.some((l) => p.slug.startsWith(`${l}/`))
-  );
+  )
 
   // IMPORTANT: paginate needs to know locale per page
   // So we paginate separately per locale:
-  const result: any[] = [];
+  const result: GetStaticPathsResult = []
+
   for (const locale of locales) {
-    const postsForLocale = allPosts.filter((p) => p.slug.startsWith(`${locale}/`));
-    const pages = paginate(postsForLocale, { pageSize: 4, params: { locale } });
-    result.push(...pages);
+    const postsForLocale = allPosts.filter((p) => p.slug.startsWith(`${locale}/`))
+    const pages = paginate(postsForLocale, { pageSize: 4, params: { locale } })
+    result.push(...pages)
   }
-  return result;
+
+  return result
 }
 
-const { page } = Astro.props;
-const locale = Astro.params.locale;
+const { page } = Astro.props
+const locale = Astro.params.locale
 
 // ✅ Only posts for this locale (for tags)
-const allPosts = await getCollection("recipes", (p) => p.slug.startsWith(`${locale}/`));
+const localePosts = await getCollection('recipes', (p) => p.slug.startsWith(`${locale}/`))
 
-const posts = page.data;
+const posts = page.data
 
-const allTags = allPosts.flatMap((post) => post.data.tags);
-const tags = Array.from(new Set(allTags));
+const allTags = localePosts.flatMap((post) => post.data.tags)
+const tags = Array.from(new Set(allTags))
 ---
 
-<Layout title="Recipes" active="recipes">
+<Layout title='Recipes' active='recipes'>
   <Container>
     <RecipeHeader />
 
-    <div class="mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1">
-      <TagList tags={tags} title="Tags" />
+    <div class='max-lg:grid-cols-1 mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3'>
+      <TagList tags={tags} title='Tags' />
     </div>
 
-    <div class="mb-32">
+    <div class='mb-32'>
       <PostList posts={posts} />
     </div>
 

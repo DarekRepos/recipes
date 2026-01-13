@@ -1,18 +1,18 @@
 ---
-import H1 from "./H1.astro";
+import H1 from './H1.astro'
 
-import { getTranslation } from "../i18n";
-import { DEFAULT_LOCALE, type Locale } from "../i18n/locales";
+import { getTranslation } from '../i18n'
+import { DEFAULT_LOCALE, type Locale } from '../i18n/locales'
 
-const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
-const t = getTranslation(locale);
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale
+const t = getTranslation(locale)
 
-const title = t.recipesHeader?.title ?? "The forgotten recipes";
+const title = t.recipesHeader?.title ?? 'The forgotten recipes'
 const subtitle =
-  t.recipesHeader?.subtitle ?? "Is there anyone who remembers the taste of Kresy specialities?";
+  t.recipesHeader?.subtitle ?? 'Is there anyone who remembers the taste of Kresy specialities?'
 ---
 
 <H1 text={title} />
-<p class="mb-24 text-2xl text-zinc-900 max-sm:mb-14">
+<p class='max-sm:mb-14 mb-24 text-2xl text-zinc-900'>
   {subtitle}
 </p>

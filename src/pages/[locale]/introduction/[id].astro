@@ -5,8 +5,8 @@ import IntroductionPage from '../../../components/pages/IntroductionPage.astro'
 //const locales = ['pl', 'de'] as const
 
 export async function getStaticPaths() {
-    // ✅ MUST be inside the function
-  const locales = ["pl", "de"];
+  // ✅ MUST be inside the function
+  const locales = ['pl', 'de']
   const items = await getCollection('introductioncards')
   console.log(
     'INTRODUCTION IDS:',

@@ -1,47 +1,47 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry } from 'astro:content'
 
-import Layout from "../../layouts/Layout.astro";
-import PostList from "../../components/PostList.astro";
-import Container from "../../components/Container.astro";
+import Layout from '../../layouts/Layout.astro'
+import PostList from '../../components/PostList.astro'
+import Container from '../../components/Container.astro'
 
-import { getTranslation } from "../../i18n";
-import { DEFAULT_LOCALE } from "../../i18n/locales";
+import { getTranslation } from '../../i18n'
+import { DEFAULT_LOCALE } from '../../i18n/locales'
 
 export async function getStaticPaths() {
-  const authors = await getCollection("authors");
-  return authors.map(({ slug }) => ({ params: { slug } }));
+  const authors = await getCollection('authors')
+  return authors.map(({ slug }) => ({ params: { slug } }))
 }
 
-const { slug } = Astro.params;
+const { slug } = Astro.params
 
-const t = getTranslation(DEFAULT_LOCALE);
+const t = getTranslation(DEFAULT_LOCALE)
 
-const author = await getEntry("authors", slug as string);
-if (!author) return Astro.redirect("/404");
+const author = await getEntry('authors', slug as string)
+if (!author) return Astro.redirect('/404')
 
 // ✅ only EN recipes
-const allPosts = await getCollection("recipes", (p) => p.slug.startsWith("en/"));
-const posts = allPosts.filter((post) => post.data.author === author.slug);
+const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
+const posts = allPosts.filter((post) => post.data.author === author.slug)
 
 // base helper (supports base: "/recipes")
-const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
-const listHref = `${BASE}/recipe/list/1`;
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
+const listHref = `${BASE}/recipe/list/1`
 
-const heading = t.authorsPage.heading.replace("{name}", author.data.name);
+const heading = t.authorsPage.heading.replace('{name}', author.data.name)
 ---
 
-<Layout title={author.data.name} active="recipes">
+<Layout title={author.data.name} active='recipes'>
   <Container>
-    <div class="mb-16 text-2xl text-zinc-500">
-      ← <a href={listHref} class="underline">{t.authorsPage.back}</a>
+    <div class='mb-16 text-2xl text-zinc-500'>
+      ← <a href={listHref} class='underline'>{t.authorsPage.back}</a>
     </div>
 
-    <p class="mb-16 text-6xl font-bold text-yellow-800">
+    <p class='mb-16 text-6xl font-bold text-yellow-800'>
       {heading}
     </p>
 
-    <div class="mb-60">
+    <div class='mb-60'>
       <PostList posts={posts} />
     </div>
   </Container>

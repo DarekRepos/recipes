@@ -1,11 +1,11 @@
 ---
 import { Image } from 'astro:assets'
 import Navigation from './Navigation.astro'
-const { active } = Astro.props;
+const { active } = Astro.props
 ---
 
 <header
-  class='flex w-full max-w-7xl items-center justify-between justify-self-center px-24 py-12 max-sm:px-5 max-sm:py-10'
+  class='max-sm:px-5 max-sm:py-10 flex w-full max-w-7xl items-center justify-between justify-self-center px-24 py-12'
 >
   <a href='/recipes' class='flex items-center gap-x-4'>
     <Image
@@ -18,7 +18,7 @@ const { active } = Astro.props;
       class='w-16'
     />
 
-    <p class='text-3xl uppercase text-zinc-900 max-xl:hidden'>recipes</p>
+    <p class='max-xl:hidden text-3xl uppercase text-zinc-900'>recipes</p>
   </a>
- <Navigation active={active}/>
+  <Navigation active={active} />
 </header>

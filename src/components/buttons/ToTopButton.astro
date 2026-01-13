@@ -5,6 +5,8 @@ import { Icon } from 'astro-icon/components'
 <script type='module' is:inline>
   const backToTop = document.getElementById('return-to-top')
 
+  if (!backToTop) return
+
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
       backToTop.style.opacity = '1'
@@ -19,12 +21,14 @@ import { Icon } from 'astro-icon/components'
   })
 
   function scrollToTop(scrollDuration) {
-    var scrollStep = -window.scrollY / (scrollDuration / 15),
-      scrollInterval = setInterval(function () {
-        if (window.scrollY !== 0) {
-          window.scrollBy(0, scrollStep)
-        } else clearInterval(scrollInterval)
-      }, 15)
+    const scrollStep = -window.scrollY / (scrollDuration / 15)
+    const scrollInterval = setInterval(() => {
+      if (window.scrollY !== 0) {
+        window.scrollBy(0, scrollStep)
+      } else {
+        clearInterval(scrollInterval)
+      }
+    }, 15)
   }
 </script>
 

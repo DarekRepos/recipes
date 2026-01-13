@@ -1,15 +1,14 @@
 ---
 const { active } = Astro.props
 
-import { getTranslation } from "../i18n";
-
+import { getTranslation } from '../i18n'
 
 const locales = ['en', 'pl', 'de'] as const
 const defaultLocale = 'en'
 type Locale = (typeof locales)[number]
 
 const currentLocale: Locale = (Astro.currentLocale ?? defaultLocale) as Locale
-const t = getTranslation(currentLocale);
+const t = getTranslation(currentLocale)
 
 // If you have base: "/recipes" in astro.config.mjs,
 // import.meta.env.BASE_URL will usually be "/recipes/" (with trailing slash)
@@ -18,19 +17,18 @@ const pathname = Astro.url.pathname // e.g. "/recipes/pl/contact" or "/recipes/c
 
 // 1) Remove base prefix ("/recipes") if present
 function stripBase(path: string) {
-  if (!BASE) return path;
+  if (!BASE) return path
 
   // normalize
-  if (path === BASE) return "/";
+  if (path === BASE) return '/'
 
-  if (path.startsWith(BASE + "/")) {
-    const rest = path.slice(BASE.length);
-    return rest.startsWith("/") ? rest : `/${rest}`;
+  if (path.startsWith(BASE + '/')) {
+    const rest = path.slice(BASE.length)
+    return rest.startsWith('/') ? rest : `/${rest}`
   }
 
-  return path;
+  return path
 }
-
 
 // 2) Remove any existing locale prefix from the remaining path
 function stripLocale(path: string) {
@@ -44,36 +42,33 @@ function stripLocale(path: string) {
 
 // 3) Build final URL: base + (locale prefix if not default) + clean path
 function buildLocaleUrl(target: Locale) {
-  const noBase = stripBase(pathname);          // "/pl/contact" or "/contact" OR "/recipes/..."
-  let clean = stripLocale(noBase) || "/";
+  const noBase = stripBase(pathname) // "/pl/contact" or "/contact" OR "/recipes/..."
+  let clean = stripLocale(noBase) || '/'
 
   // ✅ if the path still starts with "/recipes", remove it (prevents /de/recipes/)
   if (BASE && clean.startsWith(`${BASE}/`)) {
-    clean = clean.slice(BASE.length) || "/";
+    clean = clean.slice(BASE.length) || '/'
   } else if (BASE && clean === BASE) {
-    clean = "/";
+    clean = '/'
   }
 
-  const prefix = target === defaultLocale ? "" : `/${target}`;
-  return `${BASE}${prefix}${clean}`;
+  const prefix = target === defaultLocale ? '' : `/${target}`
+  return `${BASE}${prefix}${clean}`
 }
-
 
 const switcherLinks = locales.map((l) => ({
   locale: l,
   href: buildLocaleUrl(l)
 }))
 
-
-
 // Build URL for current locale.
 // Pass paths WITHOUT "/recipes" prefix, e.g. "/", "/about", "/contact"
 function navHref(path: string) {
-  const normalized = path.startsWith("/") ? path : `/${path}`;
-  const prefix = currentLocale === defaultLocale ? "" : `/${currentLocale}`;
+  const normalized = path.startsWith('/') ? path : `/${path}`
+  const prefix = currentLocale === defaultLocale ? '' : `/${currentLocale}`
   // "/recipes" + "/pl" + "/about" => "/recipes/pl/about"
   // "/recipes" + "" + "/about" => "/recipes/about"
-  return `${BASE}${prefix}${normalized}`;
+  return `${BASE}${prefix}${normalized}`
 }
 ---
 
@@ -91,7 +86,7 @@ function navHref(path: string) {
     >
       <li>
         <a
-           href={navHref("/")}
+          href={navHref('/')}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'home' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
           {t.nav.home}
@@ -99,15 +94,15 @@ function navHref(path: string) {
       </li>
       <li>
         <a
-          href={navHref("/borderland")}
+          href={navHref('/borderland')}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'bordeland' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
-         {t.nav.borderland}
+          {t.nav.borderland}
         </a>
       </li>
       <li>
         <a
-          href={navHref("/recipe/list/1")}
+          href={navHref('/recipe/list/1')}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'recipes' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
           {t.nav.recipes}
@@ -115,7 +110,7 @@ function navHref(path: string) {
       </li>
       <li>
         <a
-          href={navHref("/about")}
+          href={navHref('/about')}
           class={`block rounded-xl px-6 py-3 text-xl text-white opacity-70 hover:opacity-100 duration-300 ${active === 'about' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
           {t.nav.about}
@@ -123,7 +118,7 @@ function navHref(path: string) {
       </li>
       <li>
         <a
-          href={navHref("/contact")}
+          href={navHref('/contact')}
           class={`block rounded-xl px-6 py-3 text-xl text-white  opacity-70 hover:opacity-100 duration-300 ${active === 'contact' ? 'bg-yellow-600' : 'bg-yellow-900'}`}
         >
           {t.nav.contact}

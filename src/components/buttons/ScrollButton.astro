@@ -1,34 +1,42 @@
-<div class="py-16">
-    <div id="scrollButton" class="relative">
-      <a href="#section-articles" class="block text-white transform transition duration-300 hover:opacity-50 hover:scale-110">
-        <button class="relative w-16 h-16 border border-white rounded-full bg-transparent text-white font-normal text-[20px] leading-[64px] font-josefin-sans cursor-pointer box-border">
-          Scroll
-          <span class="absolute top-2/3 left-1/2 w-4 h-4 border-l border-b border-white transform rotate-[-45deg] translate-x-[-50%] translate-y-[-50%]"></span>
-          <span class="absolute top-0 left-0 w-16 h-16 rounded-full box-border opacity-0 animate-sdtapping"></span>
-        </button>
-      </a>
-    </div>
+<div class='py-16'>
+  <div id='scrollButton' class='relative'>
+    <a
+      href='#section-articles'
+      class='block transform text-white transition duration-300 hover:scale-110 hover:opacity-50'
+    >
+      <button
+        class='relative box-border h-16 w-16 cursor-pointer rounded-full border border-white bg-transparent font-josefin-sans text-[20px] font-normal leading-[64px] text-white'
+      >
+        Scroll
+        <span
+          class='absolute left-1/2 top-2/3 h-4 w-4 translate-x-[-50%] translate-y-[-50%] rotate-[-45deg] transform border-b border-l border-white'
+        ></span>
+        <span
+          class='animate-sdtapping absolute left-0 top-0 box-border h-16 w-16 rounded-full opacity-0'
+        ></span>
+      </button>
+    </a>
   </div>
-  
-  <style>
-    @keyframes sdtapping {
-      0% {
-        opacity: 0;
-      }
-      30% {
-        opacity: 1;
-      }
-      60% {
-        box-shadow: 0 0 0 60px rgba(255, 255, 255, 0.1);
-        opacity: 0;
-      }
-      100% {
-        opacity: 0;
-      }
+</div>
+
+<style>
+  @keyframes sdtapping {
+    0% {
+      opacity: 0;
     }
-  
-    .animate-sdtapping {
-      animation: sdtapping 3s infinite;
+    30% {
+      opacity: 1;
     }
-  </style>
-  
+    60% {
+      box-shadow: 0 0 0 60px rgba(255, 255, 255, 0.1);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .animate-sdtapping {
+    animation: sdtapping 3s infinite;
+  }
+</style>
