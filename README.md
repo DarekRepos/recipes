@@ -1,6 +1,12 @@
 
 # A Culinary Journey
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
+[![Build](https://github.com/darekrepos/recipes/actions/workflows/build.yml/badge.svg)](https://github.com/darekrepos/recipes/actions/workflows/build.yml)
+[![Deploy to GitHub Pages](https://github.com/darekrepos/recipes/actions/workflows/deploy.yml/badge.svg)](https://github.com/darekrepos/recipes/actions/workflows/deploy.yml)
+[![Lint](https://github.com/darekrepos/recipes/actions/workflows/lint.yml/badge.svg)](https://github.com/darekrepos/recipes/actions/workflows/lint.yml)
+[![Pages](https://img.shields.io/badge/deployed-GitHub%20Pages-blue)](https://darekrepos.github.io/recipes/)
+[![License](https://img.shields.io/github/license/darekrepos/recipes)](./LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/darekrepos/recipes)](https://github.com/darekrepos/recipes)
 
 
 Welcome to A Culinary Journey, a website dedicated to promoting the forgotten regional meals from the Polish Kresy region. Here, we aim to inspire you in the kitchen and help you rediscover the tastes of older generations. Our hope is that you can experience, if only for a moment, the unique smell and flavor of the Kresy region.
