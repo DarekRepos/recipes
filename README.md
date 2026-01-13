@@ -1,7 +1,7 @@
 # A Culinary Journey
 
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
-[![Build](https://github.com/darekrepos/recipes/actions/workflows/build.yml/badge.svg)](https://github.com/darekrepos/recipes/actions/workflows/build.yml)
+[![Build](https://github.com/DarekRepos/recipes/actions/workflows/deploy.yml/badge.svg)](https://github.com/DarekRepos/recipes/actions/workflows/deploy.yml)
 [![Deploy to GitHub Pages](https://github.com/darekrepos/recipes/actions/workflows/deploy.yml/badge.svg)](https://github.com/darekrepos/recipes/actions/workflows/deploy.yml)
 [![Lint](https://github.com/darekrepos/recipes/actions/workflows/lint.yml/badge.svg)](https://github.com/darekrepos/recipes/actions/workflows/lint.yml)
 [![Pages](https://img.shields.io/badge/deployed-GitHub%20Pages-blue)](https://darekrepos.github.io/recipes/)
