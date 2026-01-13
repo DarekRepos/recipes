@@ -2,42 +2,37 @@
 import { type CollectionEntry, getEntry } from 'astro:content'
 import { Image } from 'astro:assets'
 import TagList from './TagList.astro'
-
-import { getTranslation } from '../i18n' // <-- dostosuj ścieżkę
-import { DEFAULT_LOCALE } from '../i18n/locales' // <-- dostosuj ścieżkę
+import { getTranslation } from '../i18n'
 
 type Props = {
   post: CollectionEntry<'recipes'>
   hrefPrefix: string
 }
 
-const { post, hrefPrefix } = Astro.props
+const { post, hrefPrefix } = Astro.props as Props
 
 const author = await getEntry('authors', String(post.data.author).trim())
 
-const locales = ['en', 'pl', 'de'] as const
-const defaultLocale = 'en'
-type Locale = (typeof locales)[number]
+// type-only locale union (no runtime `locales` var needed)
+type Locale = 'en' | 'pl' | 'de'
+const defaultLocale: Locale = 'en'
 
-const currentLocale: Locale = (Astro.currentLocale ?? defaultLocale) as Locale
+const currentLocale = (Astro.currentLocale ?? defaultLocale) as Locale
 const t = getTranslation(currentLocale)
 
-// klucz autora z przepisu
-const authorKey = String(post.data.author).trim()
-
-// tłumaczona nazwa autora (fallback na author.data.name)
-type AuthorKey = "book-recipe" | "traditional-recipe";
+type AuthorKey = 'book-recipe' | 'traditional-recipe'
 
 function isAuthorKey(x: string): x is AuthorKey {
-  return x === "book-recipe" || x === "traditional-recipe";
+  return x === 'book-recipe' || x === 'traditional-recipe'
 }
 
-const authorKeyRaw = String(post.data.author).trim();
+const authorKeyRaw = String(post.data.author).trim()
 
-const authorLabel =
-  isAuthorKey(authorKeyRaw) ? t.authors[authorKeyRaw] : (author?.data.name ?? authorKeyRaw);
-  
-// linki
+const authorLabel = isAuthorKey(authorKeyRaw)
+  ? t.authors[authorKeyRaw]
+  : (author?.data.name ?? authorKeyRaw)
+
+// links
 const cleanRecipeSlug = post.slug.replace(/^(en|pl|de)\//, '')
 const recipeHref = `${hrefPrefix}/recipe/${cleanRecipeSlug}`
 const authorHref = author ? `${hrefPrefix}/author/${author.slug}` : null

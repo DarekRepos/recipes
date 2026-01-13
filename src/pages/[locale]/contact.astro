@@ -1,13 +1,9 @@
 ---
 export function getStaticPaths() {
-  return [
-    { params: { locale: "pl" } },
-    { params: { locale: "de" } },
-  ];
+  return [{ params: { locale: 'pl' } }, { params: { locale: 'de' } }]
 }
 
-import ContactPage from "../../components/pages/ContactPage.astro";
-
-
+import ContactPage from '../../components/pages/ContactPage.astro'
 ---
+
 <ContactPage />

@@ -1,25 +1,23 @@
 ---
-const locales = ["en", "pl", "de"];
-const defaultLocale = "en";
-const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
+const locales = ['en', 'pl', 'de']
+const defaultLocale = 'en'
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
 ---
 
 <script is:inline define:vars={{ locales, defaultLocale, BASE }}>
-  (function () {
-    if (localStorage.getItem("preferred-locale")) return;
+  ;(function () {
+    if (localStorage.getItem('preferred-locale')) return
 
-    const path = window.location.pathname;
+    const path = window.location.pathname
 
-    const alreadyLocalized = locales.some(
-      (l) => path.startsWith(`${BASE}/${l}`)
-    );
-    if (alreadyLocalized) return;
+    const alreadyLocalized = locales.some((l) => path.startsWith(`${BASE}/${l}`))
+    if (alreadyLocalized) return
 
-    const browserLang = navigator.language.split("-")[0];
+    const browserLang = navigator.language.split('-')[0]
 
-    if (!locales.includes(browserLang)) return;
-    if (browserLang === defaultLocale) return;
+    if (!locales.includes(browserLang)) return
+    if (browserLang === defaultLocale) return
 
-    window.location.replace(`${BASE}/${browserLang}`);
-  })();
+    window.location.replace(`${BASE}/${browserLang}`)
+  })()
 </script>

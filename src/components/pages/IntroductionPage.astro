@@ -1,32 +1,32 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import Container from "../../components/Container.astro";
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import Container from '../../components/Container.astro'
 
-import { getTranslation } from "../../i18n";
-import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
+import { DEFAULT_LOCALE, type Locale } from '../../i18n/locales'
 
-const { locale, id } = Astro.props;
+const { locale, id } = Astro.props
 
-const lang = (locale ?? DEFAULT_LOCALE) as Locale;
-const t = getTranslation(lang);
+const lang = (locale ?? DEFAULT_LOCALE) as Locale
+//const t = getTranslation(lang)
 
-const items = await getCollection("introduction", (entry) =>
-  entry.id.startsWith(`${lang}/`) && String(entry.data.id) === String(id)
-);
+const items = await getCollection(
+  'introduction',
+  (entry) => entry.id.startsWith(`${lang}/`) && String(entry.data.id) === String(id)
+)
 
-const item = items[0];
-if (!item) throw new Error("Introduction item not found");
+const item = items[0]
+if (!item) throw new Error('Introduction item not found')
 ---
 
-<Layout title={item.data.title} active="home">
+<Layout title={item.data.title} active='home'>
   <Container>
-    <article class="mx-auto max-w-3xl py-16">
-      <h1 class="mb-6 text-4xl font-bold text-yellow-800">
+    <article class='mx-auto max-w-3xl py-16'>
+      <h1 class='mb-6 text-4xl font-bold text-yellow-800'>
         {item.data.title}
       </h1>
 
-      <p class="text-lg leading-relaxed opacity-80">
+      <p class='text-lg leading-relaxed opacity-80'>
         {item.data.description}
       </p>
     </article>

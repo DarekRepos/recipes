@@ -4,27 +4,29 @@ import prazucha from '../../assets/prazucha.jpg'
 import maki from '../../assets/maki.png'
 import warzywa from '../../assets/warzywa.png'
 import pierogi from '../../assets/pierogi.jpg'
-import { getTranslation } from "../../i18n";
-import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
+import { getTranslation } from '../../i18n'
+import { DEFAULT_LOCALE, type Locale } from '../../i18n/locales'
 
-const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
-const t = getTranslation(locale);
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale
+const t = getTranslation(locale)
 const gallery = [prazucha, pierogi, maki, warzywa]
 ---
 
 <section class='w-full overflow-hidden'>
   <div class='grid grid-cols-2 lg:grid-cols-4'>
-    {gallery.map((image) => (
-      <picture class='h-full w-full aspect-w-16 aspect-h-9'>
-        <Image
-          src={image}
-          widths={[240, 540, 720]}
-          sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 100vw`} 
-          alt={t.home.gallery.imageAlt}
-          class='object-contain sm:object-cover'
-          format='webp'
-        />
-      </picture>
-    ))}
+    {
+      gallery.map((image) => (
+        <picture class='aspect-w-16 aspect-h-9 h-full w-full'>
+          <Image
+            src={image}
+            widths={[240, 540, 720]}
+            sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, 100vw`}
+            alt={t.home.gallery.imageAlt}
+            class='object-contain sm:object-cover'
+            format='webp'
+          />
+        </picture>
+      ))
+    }
   </div>
 </section>

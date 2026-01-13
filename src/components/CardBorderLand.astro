@@ -6,19 +6,23 @@ type Props = {
   item: CollectionEntry<'borderland'>
 }
 
-const { item} = Astro.props
-
+const { item } = Astro.props
 ---
-<div class="card mb-3 max-w-540px">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
-      <div class="col-span-1 md:col-span-1">
-        <Image src={item.data.imageUrl} alt={item.data.title} class='rounded-xl' />
+
+<div class='card max-w-540px mb-3'>
+  <div class='grid grid-cols-1 gap-0 md:grid-cols-2'>
+    <div class='col-span-1 md:col-span-1'>
+      <Image src={item.data.imageUrl} alt={item.data.title} class='rounded-xl' />
     </div>
-      <div class="col-span-1 md:col-span-1 px-6">
-        <div class="card-body">
-          <h5 class="font-fraunces text-ss-very-dark-desaturated-blue text-3xl font-bold sm:text-[2.5rem] sm:leading-tight max-sm:mt-8 text-yellow-800">{item.data.title}</h5>
-          <p class="text-body text-ss-dark-grayish-blue mb-8 mt-6">{item.data.description}</p>
-        </div>
+    <div class='col-span-1 px-6 md:col-span-1'>
+      <div class='card-body'>
+        <h5
+          class='font-fraunces text-ss-very-dark-desaturated-blue max-sm:mt-8 text-3xl font-bold text-yellow-800 sm:text-[2.5rem] sm:leading-tight'
+        >
+          {item.data.title}
+        </h5>
+        <p class='text-body text-ss-dark-grayish-blue mb-8 mt-6'>{item.data.description}</p>
       </div>
     </div>
   </div>
+</div>

@@ -1,36 +1,36 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
 
-import Container from "../../components/Container.astro";
-import RecipeHeader from "../../components/RecipeHeader.astro";
-import Tag from "../../components/Tag.astro";
+import Container from '../../components/Container.astro'
+import RecipeHeader from '../../components/RecipeHeader.astro'
+import Tag from '../../components/Tag.astro'
 
-import { getTranslation } from "../../i18n";
-import { DEFAULT_LOCALE } from "../../i18n/locales";
+import { getTranslation } from '../../i18n'
+import { DEFAULT_LOCALE } from '../../i18n/locales'
 
-const t = getTranslation(DEFAULT_LOCALE);
+const t = getTranslation(DEFAULT_LOCALE)
 
 // EN-only posts
-const allPosts = await getCollection("recipes", (p) => p.slug.startsWith("en/"));
+const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
 
 // unique canonical tag keys
 const tagKeys = Array.from(
   new Set(allPosts.flatMap((post) => post.data.tags.map((x) => String(x).toLowerCase())))
-).sort();
+).sort()
 
-const tagsTitle = t.common?.tags ?? "Tags";
-const pageTitle = t.nav?.recipes ?? "Recipes";
+const tagsTitle = t.common?.tags ?? 'Tags'
+const pageTitle = t.nav?.recipes ?? 'Recipes'
 ---
 
-<Layout title={pageTitle} active="recipes">
+<Layout title={pageTitle} active='recipes'>
   <Container>
     <RecipeHeader />
 
-    <div class="grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 mb-16 max-lg:grid-cols-1">
-      <h2 class="font-bold text-5xl text-yellow-800">{tagsTitle}</h2>
+    <div class='max-lg:grid-cols-1 mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3'>
+      <h2 class='text-5xl font-bold text-yellow-800'>{tagsTitle}</h2>
 
-      <div class="flex gap-4 flex-wrap justify-center items-center">
+      <div class='flex flex-wrap items-center justify-center gap-4'>
         {tagKeys.map((key) => <Tag tag={key} />)}
       </div>
     </div>

@@ -1,47 +1,47 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
 
-import Layout from "../../layouts/Layout.astro";
-import CategoryList from "../../components/TagList.astro";
-import H1 from "../../components/H1.astro";
-import Container from "../../components/Container.astro";
-import PostMeta from "../../components/PostMeta.astro";
-import TableOfContents from "../../components/TableOfContents.astro";
+import Layout from '../../layouts/Layout.astro'
+import CategoryList from '../../components/TagList.astro'
+import H1 from '../../components/H1.astro'
+import Container from '../../components/Container.astro'
+import PostMeta from '../../components/PostMeta.astro'
+import TableOfContents from '../../components/TableOfContents.astro'
 
-import { getTranslation } from "../../i18n";
-import { DEFAULT_LOCALE } from "../../i18n/locales";
+import { getTranslation } from '../../i18n'
+import { DEFAULT_LOCALE } from '../../i18n/locales'
 
 export async function getStaticPaths() {
   // ✅ EN only
-  const posts = await getCollection("recipes", (p) => p.slug.startsWith("en/"));
+  const posts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
 
   return posts.map((post) => ({
     // URL "/recipe/<slug>" (remove "en/")
-    params: { slug: post.slug.replace(/^en\//, "") },
-    props: post,
-  }));
+    params: { slug: post.slug.replace(/^en\//, '') },
+    props: post
+  }))
 }
 
-type Props = CollectionEntry<"recipes">;
-const post = Astro.props;
+type Props = CollectionEntry<'recipes'>
+const post = Astro.props
 
-const t = getTranslation(DEFAULT_LOCALE);
+const t = getTranslation(DEFAULT_LOCALE)
 
-const { Content, headings } = await post.render();
+const { Content, headings } = await post.render()
 
 // base-aware link to list page 1
-const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
-const listHref = `${BASE}/recipe/list/1`;
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
+const listHref = `${BASE}/recipe/list/1`
 ---
 
-<Layout title={post.data.title} active="recipes">
+<Layout title={post.data.title} active='recipes'>
   <Container>
-    <div class="mb-16 text-2xl text-zinc-500">
-      ← <a href={listHref} class="underline">{t.recipesPage.backToList}</a>
+    <div class='mb-16 text-2xl text-zinc-500'>
+      ← <a href={listHref} class='underline'>{t.recipesPage.backToList}</a>
     </div>
 
-    <div class="mb-4">
+    <div class='mb-4'>
       <CategoryList tags={post.data.tags} />
     </div>
 
@@ -54,20 +54,20 @@ const listHref = `${BASE}/recipe/list/1`;
       alt={post.data.title}
       width={1024}
       height={1024 / 1.5}
-      format="webp"
-      class="aspect-thumbnail mb-28 rounded-2xl object-cover shadow-xl"
+      format='webp'
+      class='aspect-thumbnail mb-28 rounded-2xl object-cover shadow-xl'
     />
 
-    <div class="prose prose-2xl pb-8 overflow-visible relative">
+    <div class='prose prose-2xl relative overflow-visible pb-8'>
       {post.data.description}
     </div>
 
-    <div class="mb-10">
+    <div class='mb-10'>
       <TableOfContents headings={headings} />
     </div>
 
-    <div class="relative">
-      <div class="prose prose-2xl overflow-visible relative">
+    <div class='relative'>
+      <div class='prose prose-2xl relative overflow-visible'>
         <Content />
       </div>
     </div>

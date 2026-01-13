@@ -1,13 +1,9 @@
 ---
 export function getStaticPaths() {
-  return [
-    { params: { locale: "pl" } },
-    { params: { locale: "de" } },
-  ];
+  return [{ params: { locale: 'pl' } }, { params: { locale: 'de' } }]
 }
 
-import AboutPage from "../../components/pages/AboutPage.astro";
-
-
+import AboutPage from '../../components/pages/AboutPage.astro'
 ---
+
 <AboutPage />

@@ -1,54 +1,54 @@
 ---
-import Container from "../../components/Container.astro";
-import Layout from "../../layouts/Layout.astro";
+import Container from '../../components/Container.astro'
+import Layout from '../../layouts/Layout.astro'
 
-import { getTranslation } from "../../i18n";
-import { DEFAULT_LOCALE, type Locale } from "../../i18n/locales";
+import { getTranslation } from '../../i18n'
+import { DEFAULT_LOCALE, type Locale } from '../../i18n/locales'
 
-const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
-const t = getTranslation(locale);
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale
+const t = getTranslation(locale)
 ---
 
-<Layout title={t.about.title} active="about">
+<Layout title={t.about.title} active='about'>
   <Container>
     <article>
-      <div class="grid min-h-screen place-items-center">
-        <div class="xs:grid-cols-2 xs:p-8 grid max-w-7xl gap-4 p-4 md:grid-cols-4 lg:gap-6">
+      <div class='grid min-h-screen place-items-center'>
+        <div class='xs:grid-cols-2 xs:p-8 grid max-w-7xl gap-4 p-4 md:grid-cols-4 lg:gap-6'>
           <h1
-            class="xs:col-span-2 xs:grid xs:gap-4 xs:grid-cols-2 text-4xl font-extrabold md:col-span-3 md:grid-cols-3 md:text-5xl lg:text-6xl"
+            class='xs:col-span-2 xs:grid xs:gap-4 xs:grid-cols-2 text-4xl font-extrabold md:col-span-3 md:grid-cols-3 md:text-5xl lg:text-6xl'
           >
-            <span class="text-yellow-800 md:col-span-2">
+            <span class='text-yellow-800 md:col-span-2'>
               {t.about.heading}
             </span>
           </h1>
 
           <p
-            class="xs:row-start-2 xs:col-start-2 xs:self-center md:col-span-2 md:col-start-1 md:pr-12 md:text-lg"
+            class='xs:row-start-2 xs:col-start-2 xs:self-center md:col-span-2 md:col-start-1 md:pr-12 md:text-lg'
           >
             {t.about.intro1}
           </p>
 
-          <div class="xs:h-auto h-16 self-end bg-yellow-900"></div>
-          <div class="xs:h-auto h-16 self-end bg-yellow-900"></div>
+          <div class='xs:h-auto h-16 self-end bg-yellow-900'></div>
+          <div class='xs:h-auto h-16 self-end bg-yellow-900'></div>
 
-          <div class="xs:h-auto h-16 bg-yellow-600 flex items-center justify-center">
-            <div class="text-center text-white">{t.about.labelJourney}</div>
+          <div class='xs:h-auto flex h-16 items-center justify-center bg-yellow-600'>
+            <div class='text-center text-white'>{t.about.labelJourney}</div>
           </div>
 
-          <div class="xs:h-auto h-16 bg-yellow-900 md:col-start-2"></div>
+          <div class='xs:h-auto h-16 bg-yellow-900 md:col-start-2'></div>
 
-          <div class="xs:h-auto h-16 bg-yellow-600 flex items-center justify-center">
-            <div class="text-center text-white">{t.about.labelTradition}</div>
+          <div class='xs:h-auto flex h-16 items-center justify-center bg-yellow-600'>
+            <div class='text-center text-white'>{t.about.labelTradition}</div>
           </div>
 
-          <div class="xs:h-auto h-16 bg-yellow-900"></div>
-          <div class="xs:h-auto h-16 bg-yellow-900"></div>
+          <div class='xs:h-auto h-16 bg-yellow-900'></div>
+          <div class='xs:h-auto h-16 bg-yellow-900'></div>
 
-          <div class="xs:h-auto h-16 bg-yellow-600 flex items-center justify-center">
-            <div class="text-center text-white">{t.about.labelRecipes}</div>
+          <div class='xs:h-auto flex h-16 items-center justify-center bg-yellow-600'>
+            <div class='text-center text-white'>{t.about.labelRecipes}</div>
           </div>
 
-          <p class="self-center md:col-span-2 md:px-4 md:text-center md:text-lg">
+          <p class='self-center md:col-span-2 md:px-4 md:text-center md:text-lg'>
             {t.about.intro2}
           </p>
         </div>

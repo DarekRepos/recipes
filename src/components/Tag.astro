@@ -1,30 +1,30 @@
 ---
-import { getTranslation } from "../i18n";
-import { DEFAULT_LOCALE, type Locale } from "../i18n/locales";
+import { getTranslation } from '../i18n'
+import { DEFAULT_LOCALE, type Locale } from '../i18n/locales'
 
 type Props = {
-  tag: string; // canonical key: "vegetarian"
-};
+  tag: string // canonical key: "vegetarian"
+}
 
-const { tag } = Astro.props;
+const { tag } = Astro.props
 
-const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
-const t = getTranslation(locale);
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale
+const t = getTranslation(locale)
 
 // base-aware + locale-aware
-const BASE = (import.meta.env.BASE_URL ?? "/").replace(/\/$/, "");
-const prefix = locale === DEFAULT_LOCALE ? "" : `/${locale}`;
+const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')
+const prefix = locale === DEFAULT_LOCALE ? '' : `/${locale}`
 
-const key = tag.toLowerCase();
-const href = `${BASE}${prefix}/tags/${encodeURIComponent(key)}`;
+const key = tag.toLowerCase()
+const href = `${BASE}${prefix}/tags/${encodeURIComponent(key)}`
 
 // label from i18n (fallback to key)
-const label = (t.tags as Record<string, string> | undefined)?.[key] ?? tag;
+const label = (t.tags as Record<string, string> | undefined)?.[key] ?? tag
 ---
 
 <a
   href={href}
-  class="whitespace-nowrap rounded-3xl border-2 border-yellow-800 py-2 px-4 text-xl uppercase text-yellow-800"
+  class='whitespace-nowrap rounded-3xl border-2 border-yellow-800 px-4 py-2 text-xl uppercase text-yellow-800'
 >
   {label}
 </a>
