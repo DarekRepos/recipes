@@ -54,5 +54,5 @@ export const collections = {
 
   introduction: landingPageCollection,
   borderland: borderlandPageCollection,
-  introductioncards: introductionCardsCollection
+  introductionCards: introductionCardsCollection
 }

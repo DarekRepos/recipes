@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content'
 import IntroductionPage from '../../components/pages/IntroductionPage.astro'
-
+export const prerender = true;
 export async function getStaticPaths() {
-  const items = await getCollection('introductioncards', (entry) => entry.id.startsWith('en/'))
+  const items = await getCollection('introductionCards', (entry) => entry.id.startsWith('en/'))
 
   return items.map((entry) => ({
     params: { id: String(entry.data.id) }
