@@ -96,7 +96,7 @@ export default {
 
     const sendEmail = async () => {
       try {
-        const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/api/send-email/`, {
+        const response = await fetch("https://api-email-vercel-git-main-darekrepos-projects.vercel.app/api/send-email/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
