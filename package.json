@@ -1,6 +1,6 @@
 {
   "name": "astro-recipe-website",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
