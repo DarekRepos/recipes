@@ -1,5 +1,741 @@
 ---
-import BlankPage from '../components/pages/404.astro'
+// src/pages/404.astro
 ---
 
-<BlankPage />
+<!doctype html>
+<html lang='pl'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>404 – Strona nie istnieje</title>
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap'
+      rel='stylesheet'
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --cream: #f0ede8;
+        --dark: #1a1a18;
+        --rope: #8b6914;
+        --accent: #c8903a;
+        --leaf: #6b8c52;
+        --sign-text: #f5f0e8;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background: var(--cream);
+        font-family: 'Lato', sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── LEAVES ── */
+      .leaves {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+      .leaf {
+        position: absolute;
+        width: 22px;
+        height: 12px;
+        background: var(--leaf);
+        border-radius: 50% 0 50% 0;
+        opacity: 0.75;
+        animation: fall linear infinite;
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(-60px) translateX(0) rotate(0deg);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateY(45vh) translateX(28px) rotate(120deg);
+          opacity: 0.65;
+        }
+        100% {
+          transform: translateY(100vh) translateX(-8px) rotate(240deg);
+          opacity: 0;
+        }
+      }
+      .leaf:nth-child(1) {
+        left: 6%;
+        width: 18px;
+        height: 10px;
+        animation-duration: 7s;
+        animation-delay: 0s;
+      }
+      .leaf:nth-child(2) {
+        left: 15%;
+        width: 24px;
+        height: 13px;
+        animation-duration: 9s;
+        animation-delay: 1.2s;
+      }
+      .leaf:nth-child(3) {
+        left: 29%;
+        width: 16px;
+        height: 9px;
+        animation-duration: 6s;
+        animation-delay: 2.5s;
+      }
+      .leaf:nth-child(4) {
+        left: 52%;
+        width: 20px;
+        height: 11px;
+        animation-duration: 8s;
+        animation-delay: 0.7s;
+      }
+      .leaf:nth-child(5) {
+        left: 67%;
+        width: 26px;
+        height: 14px;
+        animation-duration: 10s;
+        animation-delay: 3.1s;
+      }
+      .leaf:nth-child(6) {
+        left: 78%;
+        width: 18px;
+        height: 10px;
+        animation-duration: 7.5s;
+        animation-delay: 1.8s;
+      }
+      .leaf:nth-child(7) {
+        left: 88%;
+        width: 22px;
+        height: 12px;
+        animation-duration: 9s;
+        animation-delay: 4s;
+      }
+      .leaf:nth-child(8) {
+        left: 42%;
+        width: 15px;
+        height: 8px;
+        animation-duration: 6.5s;
+        animation-delay: 2s;
+      }
+      .leaf:nth-child(9) {
+        left: 72%;
+        width: 20px;
+        height: 11px;
+        animation-duration: 8.5s;
+        animation-delay: 5.2s;
+      }
+      .leaf:nth-child(10) {
+        left: 11%;
+        width: 23px;
+        height: 13px;
+        animation-duration: 11s;
+        animation-delay: 6s;
+      }
+      .leaf:nth-child(11) {
+        left: 93%;
+        width: 17px;
+        height: 9px;
+        animation-duration: 7s;
+        animation-delay: 3.5s;
+      }
+      .leaf:nth-child(12) {
+        left: 60%;
+        width: 21px;
+        height: 12px;
+        animation-duration: 9.5s;
+        animation-delay: 0.3s;
+      }
+
+      /* ── MAIN ── */
+      main {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 40px 24px 32px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /*
+      Layout strategy:
+      ─────────────────────────────────────────────────────
+      We use a single SVG for the ENTIRE scene (crane + rope +
+      sign frames), then overlay the text signs with HTML divs
+      positioned absolutely over the SVG sign rectangles.
+      This guarantees pixel-perfect rope connection.
+      ─────────────────────────────────────────────────────
+    */
+      .scene {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+      }
+
+      /* The main scene SVG fills the container width */
+      .scene-svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /*
+      SVG viewBox: 0 0 700 580
+      Sign 404:    rect x=280 y=80  w=200 h=90
+      Sign msg:    rect x=260 y=240 w=280 h=200
+      Both signs animate (swing) around their top-center.
+    */
+
+      /* HTML overlay signs – positioned as % of SVG natural size */
+      .sign-overlay {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--sign-text);
+        pointer-events: none; /* let SVG handle the shape */
+      }
+      /* signs need pointer events for the button */
+      .sign-overlay.sign-msg {
+        pointer-events: auto;
+      }
+
+      /*
+      Sign 404 in SVG: x=280,y=80, w=200,h=90 in a 700×580 viewBox
+      As % of viewBox: left=280/700=40%, top=80/580=13.8%,
+                       width=200/700=28.6%, height=90/580=15.5%
+    */
+      .sign-404-overlay {
+        left: 40%;
+        top: 13.8%;
+        width: 28.6%;
+        height: 15.5%;
+        animation: swing1 4s ease-in-out infinite;
+        transform-origin: top center;
+      }
+      .sign-404-overlay span {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        line-height: 1;
+      }
+
+      /*
+      Sign msg in SVG: x=260,y=240, w=280,h=200
+      left=260/700=37.1%, top=240/580=41.4%,
+      width=280/700=40%, height=200/580=34.5%
+    */
+      .sign-msg-overlay {
+        left: 37.1%;
+        top: 41.4%;
+        width: 40%;
+        height: 34.5%;
+        animation: swing2 5s ease-in-out infinite;
+        transform-origin: top center;
+        padding: 16px 20px;
+        gap: 8px;
+      }
+
+      @keyframes swing1 {
+        0%,
+        100% {
+          transform: rotate(-3deg);
+        }
+        50% {
+          transform: rotate(3deg);
+        }
+      }
+      @keyframes swing2 {
+        0%,
+        100% {
+          transform: rotate(2deg);
+        }
+        50% {
+          transform: rotate(-2deg);
+        }
+      }
+
+      .sign-msg-overlay h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(0.85rem, 1.8vw, 1.35rem);
+        font-weight: 700;
+        line-height: 1.25;
+        margin-bottom: 4px;
+      }
+      .sign-msg-overlay p {
+        font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+        font-weight: 300;
+        line-height: 1.5;
+        opacity: 0.85;
+        margin-bottom: 10px;
+      }
+
+      .btn-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid var(--accent);
+        color: var(--sign-text);
+        background: transparent;
+        padding: 7px 16px;
+        border-radius: 3px;
+        font-family: 'Lato', sans-serif;
+        font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        transition:
+          background 0.22s,
+          color 0.22s;
+        white-space: nowrap;
+      }
+      .btn-home:hover {
+        background: var(--accent);
+        color: var(--dark);
+      }
+      .btn-home svg {
+        width: 11px;
+        height: 11px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+
+      /* ── INFO STRIP ── */
+      .info-strip {
+        background: var(--cream);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 36px 20px;
+        position: relative;
+        z-index: 1;
+      }
+      .info-grid {
+        max-width: 840px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        text-align: center;
+      }
+      .info-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .info-item svg {
+        width: 26px;
+        height: 26px;
+        stroke: #8b6040;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .info-item strong {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.88rem;
+        color: var(--dark);
+      }
+      .info-item p {
+        font-size: 0.76rem;
+        color: #666;
+        line-height: 1.5;
+        font-weight: 300;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--dark);
+        color: rgba(255, 255, 255, 0.45);
+        text-align: center;
+        padding: 18px;
+        font-size: 0.76rem;
+        letter-spacing: 0.04em;
+        font-weight: 300;
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (max-width: 520px) {
+        .info-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Leaves -->
+    <div class='leaves' aria-hidden='true'>
+      <div class='leaf'></div><div class='leaf'></div>
+      <div class='leaf'></div><div class='leaf'></div>
+      <div class='leaf'></div><div class='leaf'></div>
+      <div class='leaf'></div><div class='leaf'></div>
+      <div class='leaf'></div><div class='leaf'></div>
+      <div class='leaf'></div><div class='leaf'></div>
+    </div>
+
+    <main>
+      <div class='scene'>
+        <!--
+        ══════════════════════════════════════════════════
+        SINGLE SVG — viewBox 0 0 700 580
+        Crane tower: x≈30–110, top y≈32, height≈510
+        Crane arm:   y≈18–34, from x=40 to x=380 (tip)
+        Rope:        vertical line from arm tip (x=380,y=34) down
+        Sign 404:    rect x=280 y=80  w=200 h=90  (centered under rope)
+        Rope 2:      from bottom of sign404 (y=170) down to sign-msg
+        Sign msg:    rect x=260 y=210 w=280 h=200
+        ══════════════════════════════════════════════════
+      -->
+        <svg
+          class='scene-svg'
+          viewBox='0 0 700 590'
+          xmlns='http://www.w3.org/2000/svg'
+          aria-hidden='true'
+        >
+          <defs>
+            <linearGradient id='wgh' x1='0' y1='0' x2='1' y2='0'>
+              <stop offset='0%' stop-color='#c08848'></stop>
+              <stop offset='40%' stop-color='#e0b468'></stop>
+              <stop offset='75%' stop-color='#c8935a'></stop>
+              <stop offset='100%' stop-color='#a87038'></stop>
+            </linearGradient>
+            <linearGradient id='wgv' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='0%' stop-color='#dba96e'></stop>
+              <stop offset='50%' stop-color='#c8935a'></stop>
+              <stop offset='100%' stop-color='#a07030'></stop>
+            </linearGradient>
+            <radialGradient id='bolt' cx='50%' cy='40%'>
+              <stop offset='0%' stop-color='#aaa'></stop>
+              <stop offset='100%' stop-color='#444'></stop>
+            </radialGradient>
+            <!-- marble texture for signs -->
+            <filter id='marble'>
+              <feTurbulence
+                type='turbulence'
+                baseFrequency='0.04 0.02'
+                numOctaves='4'
+                seed='3'
+                result='noise'></feTurbulence>
+              <feColorMatrix type='saturate' values='0' in='noise' result='grey'></feColorMatrix>
+              <feBlend in='SourceGraphic' in2='grey' mode='overlay' result='blend'></feBlend>
+              <feComposite in='blend' in2='SourceGraphic' operator='in'></feComposite>
+            </filter>
+          </defs>
+
+          <!-- ════ CRANE TOWER ════ -->
+          <!-- left post -->
+          <rect x='30' y='34' width='18' height='524' rx='2' fill='url(#wgv)'></rect>
+          <!-- right post -->
+          <rect x='90' y='34' width='18' height='524' rx='2' fill='url(#wgv)'></rect>
+
+          <!-- horizontal beams -->
+          <rect x='30' y='34' width='78' height='16' rx='2' fill='url(#wgh)'></rect>
+          <rect x='30' y='116' width='78' height='16' rx='2' fill='url(#wgh)'></rect>
+          <rect x='30' y='198' width='78' height='16' rx='2' fill='url(#wgh)'></rect>
+          <rect x='30' y='280' width='78' height='16' rx='2' fill='url(#wgh)'></rect>
+          <rect x='30' y='362' width='78' height='16' rx='2' fill='url(#wgh)'></rect>
+          <rect x='30' y='444' width='78' height='16' rx='2' fill='url(#wgh)'></rect>
+          <rect x='30' y='508' width='78' height='16' rx='2' fill='url(#wgh)'></rect>
+
+          <!-- diagonal braces -->
+          <line
+            x1='38'
+            y1='50'
+            x2='100'
+            y2='116'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='100'
+            y1='50'
+            x2='38'
+            y2='116'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='38'
+            y1='132'
+            x2='100'
+            y2='198'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='100'
+            y1='132'
+            x2='38'
+            y2='198'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='38'
+            y1='214'
+            x2='100'
+            y2='280'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='100'
+            y1='214'
+            x2='38'
+            y2='280'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='38'
+            y1='296'
+            x2='100'
+            y2='362'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='100'
+            y1='296'
+            x2='38'
+            y2='362'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='38'
+            y1='378'
+            x2='100'
+            y2='444'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+          <line
+            x1='100'
+            y1='378'
+            x2='38'
+            y2='444'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+
+          <!-- ════ CRANE ARM ════ -->
+          <!-- horizontal arm beam from tower top to x=380 -->
+          <rect x='38' y='20' width='344' height='16' rx='3' fill='url(#wgh)'></rect>
+          <!-- diagonal brace from tower-arm junction to arm tip -->
+          <line
+            x1='100'
+            y1='36'
+            x2='372'
+            y2='22'
+            stroke='#c8935a'
+            stroke-width='13'
+            stroke-linecap='round'></line>
+
+          <!-- bolts on arm -->
+          <circle cx='42' cy='28' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='28' r='6' fill='url(#bolt)'></circle>
+          <circle cx='372' cy='28' r='6' fill='url(#bolt)'></circle>
+
+          <!-- bolts on tower joints -->
+          <circle cx='38' cy='50' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='50' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='116' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='116' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='132' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='132' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='198' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='198' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='214' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='214' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='280' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='280' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='296' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='296' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='362' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='362' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='378' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='378' r='6' fill='url(#bolt)'></circle>
+          <circle cx='38' cy='444' r='6' fill='url(#bolt)'></circle>
+          <circle cx='100' cy='444' r='6' fill='url(#bolt)'></circle>
+
+          <!-- ════ ROPE + SIGNS ════
+             Arm tip bottom: x=372, y=36
+             Rope drops to top of sign-404 at y=80
+             Sign 404: x=272 y=80 w=200 h=90  → centered x=372
+             Rope between signs: y=170 → y=210
+             Sign msg: x=232 y=210 w=280 h=200 → centered x=372
+        -->
+
+          <!-- rope segment 1: arm tip → sign 404 top -->
+          <line
+            x1='372'
+            y1='36'
+            x2='372'
+            y2='80'
+            stroke='#8b6914'
+            stroke-width='2.5'
+            stroke-linecap='round'></line>
+
+          <!-- sign 404 background -->
+          <g style='animation: swing1 4s ease-in-out infinite; transform-origin: 372px 80px;'>
+            <rect
+              x='272'
+              y='80'
+              width='200'
+              height='90'
+              rx='4'
+              fill='#1a1a1a'
+              style='filter: url(#marble)'></rect>
+            <!-- subtle highlight -->
+            <rect
+              x='272'
+              y='80'
+              width='200'
+              height='90'
+              rx='4'
+              fill='none'
+              stroke='rgba(255,255,255,0.04)'
+              stroke-width='1'></rect>
+          </g>
+
+          <!-- rope segment 2: sign 404 bottom → sign msg top -->
+          <line
+            x1='372'
+            y1='170'
+            x2='372'
+            y2='210'
+            stroke='#8b6914'
+            stroke-width='2.5'
+            stroke-linecap='round'></line>
+
+          <!-- sign msg background -->
+          <g style='animation: swing2 5s ease-in-out infinite; transform-origin: 372px 210px;'>
+            <rect
+              x='232'
+              y='210'
+              width='280'
+              height='200'
+              rx='4'
+              fill='#1a1a1a'
+              style='filter: url(#marble)'></rect>
+            <rect
+              x='232'
+              y='210'
+              width='280'
+              height='200'
+              rx='4'
+              fill='none'
+              stroke='rgba(255,255,255,0.04)'
+              stroke-width='1'></rect>
+          </g>
+        </svg>
+
+        <!-- ════ HTML overlays on top of SVG signs ════
+           Positions are % of the SVG's rendered bounding box
+           viewBox 700×590 → proportional to container width.
+
+           Sign 404:  SVG x=272,y=80 w=200,h=90
+             left = 272/700 = 38.86%
+             top  = 80/590  = 13.56%
+             w    = 200/700 = 28.57%
+             h    = 90/590  = 15.25%
+
+           Sign msg:  SVG x=232,y=210 w=280,h=200
+             left = 232/700 = 33.14%
+             top  = 210/590 = 35.59%
+             w    = 280/700 = 40%
+             h    = 200/590 = 33.9%
+      -->
+
+        <div
+          class='sign-overlay sign-404-overlay'
+          style='left:38.86%;top:13.56%;width:28.57%;height:15.25%;'
+          role='img'
+          aria-label='Błąd 404'
+        >
+          <span>404</span>
+        </div>
+
+        <div
+          class='sign-overlay sign-msg-overlay'
+          style='left:33.14%;top:35.59%;width:40%;height:33.9%;'
+        >
+          <h1>Ups… Strona nie istnieje</h1>
+          <p>Wygląda na to, że stronę,<br />której szukasz, porwał wiatr.</p>
+          <a href='/' class='btn-home'>
+            <svg viewBox='0 0 24 24'><polyline points='15 18 9 12 15 6'></polyline></svg>
+            Wróć na stronę główną
+          </a>
+        </div>
+      </div><!-- /.scene -->
+    </main>
+
+    <!-- ── INFO STRIP ── -->
+    <section class='info-strip' aria-label='Pomocne wskazówki'>
+      <div class='info-grid'>
+        <div class='info-item'>
+          <svg viewBox='0 0 24 24'>
+            <path d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'></path>
+            <path d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'></path>
+          </svg>
+          <strong>Sprawdź adres URL</strong>
+          <p>Upewnij się, że adres został<br />wpisany poprawnie.</p>
+        </div>
+
+        <div class='info-item'>
+          <svg viewBox='0 0 24 24'>
+            <path d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'></path>
+            <polyline points='9 22 9 12 15 12 15 22'></polyline>
+          </svg>
+          <strong>Wróć na stronę główną</strong>
+          <p>Znajdziesz tam więcej<br />przydatnych informacji.</p>
+        </div>
+
+        <div class='info-item'>
+          <svg viewBox='0 0 24 24'>
+            <circle cx='11' cy='11' r='8'></circle>
+            <line x1='21' y1='21' x2='16.65' y2='16.65'></line>
+          </svg>
+          <strong>Skorzystaj z wyszukiwarki</strong>
+          <p>Może znajdziesz to,<br />czego szukasz?</p>
+        </div>
+
+        <div class='info-item'>
+          <svg viewBox='0 0 24 24'>
+            <path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'
+            ></path>
+            <polyline points='22,6 12,13 2,6'></polyline>
+          </svg>
+          <strong>Skontaktuj się z nami</strong>
+          <p>Jeśli problem nadal występuje,<br />jesteśmy do Twojej dyspozycji.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>&copy; 2024 Twoja Firma. Wszelkie prawa zastrzeżone.</footer>
+  </body>
+</html>

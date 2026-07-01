@@ -25,7 +25,7 @@ const tags = Array.from(new Set(allPosts.flatMap((p) => p.data.tags)))
   <Container>
     <RecipeHeader />
 
-    <div class='max-lg:grid-cols-1 mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3'>
+    <div class='mb-16 grid grid-cols-[auto,1fr] gap-x-14 gap-y-3 max-lg:grid-cols-1'>
       <TagList tags={tags} title={'Tags'} />
     </div>
 

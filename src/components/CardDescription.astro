@@ -41,13 +41,13 @@ function localeHref(path: string) {
       >
         {item.data.title}
       </h1>
-      <p class='text-body text-ss-dark-grayish-blue mb-8 mt-6'>
+      <p class='text-body text-ss-dark-grayish-blue mt-6 mb-8'>
         {item.data.description}
       </p>
       <div class='flex cursor-pointer flex-col items-center sm:items-start'>
         <a
           href={localeHref(`/introduction/${item.data.id}`)}
-          class='whitespace-nowrap rounded-3xl border-2 border-yellow-800 px-4 py-2 text-xl uppercase text-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-500'
+          class='rounded-3xl border-2 border-yellow-800 px-4 py-2 text-xl whitespace-nowrap text-yellow-800 uppercase focus:ring-2 focus:ring-yellow-500 focus:outline-none'
         >
           {readMoreLabel}
         </a>
