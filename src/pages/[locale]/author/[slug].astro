@@ -16,7 +16,7 @@ export async function getStaticPaths() {
   const paths = []
   for (const locale of locales) {
     for (const a of authors) {
-      paths.push({ params: { locale, slug: a.slug } })
+      paths.push({ params: { locale, slug: a.id } })
     }
   }
   return paths
@@ -42,7 +42,7 @@ const authorKeyRaw = String(slug).trim()
 const authorLabel = isAuthorKey(authorKeyRaw) ? t.authors[authorKeyRaw] : author.data.name
 
 // ✅ only recipes for this locale AND for this author key
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith(`${lang}/`))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith(`${lang}/`))
 const posts = allPosts.filter((post) => String(post.data.author).trim() === authorKeyRaw)
 
 // base helper

@@ -18,7 +18,7 @@ const locale = (Astro.params.locale ?? DEFAULT_LOCALE) as Locale
 const t = getTranslation(locale)
 
 // locale-only posts
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith(`${locale}/`))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith(`${locale}/`))
 
 const tagKeys = Array.from(
   new Set(allPosts.flatMap((post) => post.data.tags.map((x) => String(x).toLowerCase())))

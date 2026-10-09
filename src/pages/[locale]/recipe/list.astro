@@ -17,7 +17,7 @@ export function getStaticPaths() {
 const locale = (Astro.params.locale ?? DEFAULT_LOCALE) as Locale
 
 // ✅ filter by locale
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith(`${locale}/`))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith(`${locale}/`))
 const tags = Array.from(new Set(allPosts.flatMap((p) => p.data.tags)))
 ---
 

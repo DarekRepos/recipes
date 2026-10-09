@@ -9,7 +9,7 @@ import Container from '../../../components/Container.astro'
 import RecipeHeader from '../../../components/RecipeHeader.astro'
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
+  const allPosts = await getCollection('recipes', (p) => p.id.startsWith('en/'))
 
   return paginate(allPosts, { pageSize: 4 })
 }
@@ -21,7 +21,7 @@ type Props = {
 const { page } = Astro.props as Props
 
 // ✅ EN only (for tags)
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith('en/'))
 
 const posts = page.data
 

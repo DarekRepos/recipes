@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   const paths: { params: { locale: string; tag: string }; props: { tag: string } }[] = []
 
   for (const locale of locales) {
-    const posts = allPosts.filter((p) => p.slug.startsWith(`${locale}/`))
+    const posts = allPosts.filter((p) => p.id.startsWith(`${locale}/`))
 
     const tags = new Set<string>()
     posts.forEach((post) => {
@@ -39,7 +39,7 @@ const locale = (Astro.params.locale ?? DEFAULT_LOCALE) as Locale
 const t = getTranslation(locale)
 
 // posts only for this locale
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith(`${locale}/`))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith(`${locale}/`))
 const tagKey = tag.toLowerCase()
 
 const posts = allPosts.filter((post) =>

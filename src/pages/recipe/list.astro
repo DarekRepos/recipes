@@ -15,7 +15,7 @@ const locale: Locale = DEFAULT_LOCALE
 const t = getTranslation(locale)
 
 // ✅ only EN recipes
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith('en/'))
 
 const allTags = allPosts.flatMap((post) => post.data.tags)
 const tags = Array.from(new Set(allTags))

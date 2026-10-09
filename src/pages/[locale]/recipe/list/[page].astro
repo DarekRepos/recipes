@@ -15,7 +15,7 @@ type Props = {
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const locales = ['pl', 'de'] // ✅ define inside
   const allPosts = await getCollection('recipes', (p) =>
-    locales.some((l) => p.slug.startsWith(`${l}/`))
+    locales.some((l) => p.id.startsWith(`${l}/`))
   )
 
   // IMPORTANT: paginate needs to know locale per page
@@ -23,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const result: GetStaticPathsResult = []
 
   for (const locale of locales) {
-    const postsForLocale = allPosts.filter((p) => p.slug.startsWith(`${locale}/`))
+    const postsForLocale = allPosts.filter((p) => p.id.startsWith(`${locale}/`))
     const pages = paginate(postsForLocale, { pageSize: 4, params: { locale } })
     result.push(...pages)
   }
@@ -35,7 +35,7 @@ const { page } = Astro.props
 const locale = Astro.params.locale
 
 // ✅ Only posts for this locale (for tags)
-const localePosts = await getCollection('recipes', (p) => p.slug.startsWith(`${locale}/`))
+const localePosts = await getCollection('recipes', (p) => p.id.startsWith(`${locale}/`))
 
 const posts = page.data
 

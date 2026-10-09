@@ -10,7 +10,7 @@ import { DEFAULT_LOCALE } from '../../i18n/locales'
 
 export async function getStaticPaths() {
   const authors = await getCollection('authors')
-  return authors.map(({ slug }) => ({ params: { slug } }))
+  return authors.map(({ id }) => ({ params: { slug: id } }))
 }
 
 const { slug } = Astro.params
@@ -21,8 +21,8 @@ const author = await getEntry('authors', slug as string)
 if (!author) return Astro.redirect('/404')
 
 // ✅ only EN recipes
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
-const posts = allPosts.filter((post) => post.data.author === author.slug)
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith('en/'))
+const posts = allPosts.filter((post) => post.data.author === author.id)
 
 // base helper (supports base: "/recipes")
 const BASE = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '')

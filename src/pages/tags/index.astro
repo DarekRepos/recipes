@@ -12,7 +12,7 @@ import { DEFAULT_LOCALE } from '../../i18n/locales'
 const t = getTranslation(DEFAULT_LOCALE)
 
 // EN-only posts
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith('en/'))
 
 // unique canonical tag keys
 const tagKeys = Array.from(

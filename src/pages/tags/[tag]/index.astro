@@ -12,7 +12,7 @@ import { DEFAULT_LOCALE } from '../../../i18n/locales'
 type AstroProps = { tag: string }
 
 export async function getStaticPaths() {
-  const posts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
+  const posts = await getCollection('recipes', (p) => p.id.startsWith('en/'))
 
   const tags = new Set<string>()
   posts.forEach((post) => {
@@ -30,7 +30,7 @@ const { tag } = Astro.props as AstroProps
 const t = getTranslation(DEFAULT_LOCALE)
 
 // EN-only posts
-const allPosts = await getCollection('recipes', (p) => p.slug.startsWith('en/'))
+const allPosts = await getCollection('recipes', (p) => p.id.startsWith('en/'))
 const tagKey = tag.toLowerCase()
 
 const posts = allPosts.filter((post) =>

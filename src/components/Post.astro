@@ -33,9 +33,9 @@ const authorLabel = isAuthorKey(authorKeyRaw)
   : (author?.data.name ?? authorKeyRaw)
 
 // links
-const cleanRecipeSlug = post.slug.replace(/^(en|pl|de)\//, '')
+const cleanRecipeSlug = post.id.replace(/^(en|pl|de)\//, '')
 const recipeHref = `${hrefPrefix}/recipe/${cleanRecipeSlug}`
-const authorHref = author ? `${hrefPrefix}/author/${author.slug}` : null
+const authorHref = author ? `${hrefPrefix}/author/${author.id}` : null
 ---
 
 <article>
