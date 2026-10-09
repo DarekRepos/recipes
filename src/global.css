@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-special-elite: 'Special Elite', cursive;
+  --font-josefin-sans: 'Josefin Sans', sans-serif;
+  --color-custom-yellow: #fbd059;
+}
+
+@utility container {
+  margin-inline: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
